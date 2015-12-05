@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+	<meta charset="utf-8">
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	
+	<!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
+	<link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
+	<link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
+	<!--<link rel="stylesheet" href="css/mystyle.css">-->
+	<!--<script src="js/*.js">-->
+	<!--<link rel="stylesheet" href="css/main.css">-->
+	
+	<!--Theme-->
+	<link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
+	<link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
+	
+	<link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
+	
+	<script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
+	<script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
+	
+	<!--background-color:NavajoWhite !important;-->
+	<style>
+		.ui-collapsible-content{
+			
+			background-color:cornsilk !important;
+		}
+	</style>
+
+	<script>
+		$(function(){
+			$.ajax({
+				url: 'http://health.udn.com/disease/disease_list',
+				type: 'GET',
+				success: function(res) {
+					htmlContent = $(res).find('#wrapper_content');
+					var disease = $(htmlContent).find('#tab1 a');
+					for(var i = 0; i<disease.length; i++){
+						$('#list1').append('<li onclick="showDetailList('+$(disease[i]).attr('href').split("#")[1]+');"><a href="#pageDetailList">'+$(disease[i]).text()+'</a></li>');
+					}
+					$('#list1').listview().listview('refresh');
+					
+					var position = $(htmlContent).find('#tab2 a');
+					for(var i = 0; i<position.length; i++){
+						$('#list2').append('<li onclick="showDetailList('+$(position[i]).attr('href').split("#")[1]+');"><a href="#pageDetailList">'+$(position[i]).text()+'</a></li>');
+					}
+					$('#list2').listview().listview('refresh');
+
+					//console.log($(htmlContent).find('#tab2 a').text());
+					//console.log(removeBlank($(htmlContent).find("h2").text()));
+				}
+			});
+		});
+		
+		function showDetailList(id){
+			$('#detailList').empty();
+			$.ajax({
+				url: 'http://health.udn.com/disease/disease_list',
+				type: 'GET',
+				success: function(res) {
+					htmlContent = $(res).find('#wrapper_content');
+					//console.log($(htmlContent).find('a[name='+id+']').parent().find('span ul li a'));
+					var detaionItem = $(htmlContent).find('a[name='+id+']').parent().find('span ul li a');
+					for(var i = 0; i < detaionItem.length; i++){
+						//console.log($(detaionItem[i]).text());
+						//console.log($(detaionItem[i]).attr('href').replace('/disease/sole/',''));
+						$('#detailList').append('<li onclick="showDetailItem('+$(detaionItem[i]).attr('href').replace('/disease/sole/','')+');"><a href="#pageDetailItem">'+$(detaionItem[i]).text()+'</a></li>');
+					}
+					$('#detailList').listview().listview('refresh');
+					//console.log(removeBlank($(htmlContent).find("h2").text()));
+				}
+			});
+		}
+		
+		function showDetailItem(id){
+			$.ajax({
+				url: 'http://health.udn.com/disease/sole/'+id,
+				type: 'GET',
+				success: function(res) {
+					//console.log('http://health.udn.com/disease/sole/'+id);
+					var htmlContent = $(res).find("#wrapper_content");
+					//console.log(htmlContent);
+					
+					//名稱
+					//console.log(removeBlank($(htmlContent).find("h2").text()));
+					$('#diseaseName a').text($(htmlContent).find("h2").text());
+					
+					//console.log($($(htmlContent).find("#author_article_list_head ul li h5")[1]).text());
+					//console.log($($(htmlContent).find("#author_article_list_head ul li h5")[2]).text());
+					//console.log($($(htmlContent).find("#author_article_list_head ul li h5")[3]).text());
+					//console.log($($(htmlContent).find("#author_article_list_head ul li h5")[4]).text());
+					//console.log($($(htmlContent).find("#author_article_list_head ul li h5")[5]).text());
+					
+					//英文名稱
+					//console.log($($(htmlContent).find("#author_article_list_head ul li span")[1]).text());
+					$("#diseaseEnglishName").text($($(htmlContent).find("#author_article_list_head ul li span")[1]).text());
+					
+					//就診科別
+					//console.log($($(htmlContent).find("#author_article_list_head ul li span")[2]).text());
+					$("#diseaseDivision").text($($(htmlContent).find("#author_article_list_head ul li span")[2]).text());
+					
+					//身體部位
+					//console.log($($(htmlContent).find("#author_article_list_head ul li span")[3]).text());
+					$("#diseaseBodyPosition").text($($(htmlContent).find("#author_article_list_head ul li span")[3]).text());
+					
+					//症狀
+					//console.log($($(htmlContent).find("#author_article_list_head ul li span")[4]).text());
+					$("#diseaseSymptom").text($($(htmlContent).find("#author_article_list_head ul li span")[4]).text());
+					
+					//併發病症
+					//console.log(removeBlank($($(htmlContent).find("#author_article_list_head ul li span")[5]).text()));
+					$("#diseaseComplication").text($($(htmlContent).find("#author_article_list_head ul li span")[5]).text());
+					
+					//病症描述
+					//console.log($($(htmlContent).find("#author_article_list_head p")).text());
+					$("#diseaseDescription").text($($(htmlContent).find("#author_article_list_head p")).text());
+					
+					
+					//console.log($($(htmlContent).find("#wrapper_content_list li h3 span")[0]).text());
+					//console.log($($(htmlContent).find("#wrapper_content_list li h3 span")[1]).text());
+					//console.log($($(htmlContent).find("#wrapper_content_list li h3 span")[2]).text());
+					
+					//好發族群
+					//console.log($($(htmlContent).find("#wrapper_content_list .outbreak ul li")));
+					$("#diseasePredilectionGroups").html($($(htmlContent).find("#wrapper_content_list .outbreak ul")));
+					
+					//console.log($($(htmlContent).find("#wrapper_content_list .pathogen")));
+					var tmp = $($(htmlContent).find("#wrapper_content_list .pathogen"));
+					$(tmp).find('h3').remove();
+					$("#diseaseCause").html($(tmp).html());
+					
+					
+					//預防與治療
+					//console.log($($(htmlContent).find("#wrapper_content_list .prevent ul li")));
+					$("#diseasePreventionAndTreatment").html($($(htmlContent).find("#wrapper_content_list .prevent ul")));
+					
+				}
+			});
+		}
+		
+		function Trim(str,is_global){
+			var result; 
+			result = str.replace(/(^\s+)|(\s+$)/g,"");
+			if(is_global.toLowerCase()=="g")
+				result = result.replace(/\s/g,"");
+			return result;
+		}
+		
+		function removeBlank(str){
+			return Trim(str,"g");
+		}
+	
+	</script>
+</head>
+
+<body>
+	<div id="page1" data-role="page" class="background">
+		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true" class="ui-panel-active"> 
+			<ul data-role="listview">
+			  <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>			  
+			</ul>
+		</div>
+		<header data-role="header" data-position="fixed">
+			<a data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+			<h1>找症狀</h1>
+			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+		</header>
+		
+		<section data-role="page main" class="ui-content">
+			<form class="ui-filterable">
+				<input id="myFilter" data-type="search" placeholder="請輸入您要查詢的看診科別">
+			</form>
+			<ul id="list1" data-role="listview" data-filter="true" data-input="#myFilter" data-inset="true">
+				<!--
+				<li><a href="#">心血管腫瘤</a></li>
+				<li><a href="#">胃腸肝膽腎</a></li>
+				<li><a href="#">婦產兒科</a></li>
+				<li><a href="#">身心精神</a></li>
+				<li><a href="#">眼耳鼻口</a></li>
+				<li><a href="#">皮膚神經</a></li>
+				<li><a href="#">代謝免疫</a></li>
+				<li><a href="#">呼吸胸腔</a></li>
+				<li><a href="#">外科．美容</a></li>
+				-->
+			</ul>
+		</section>
+		
+		<footer data-role="footer" data-position="fixed">
+			<nav data-role="navbar">
+				<ul>
+					<li><a href="#" class="ui-btn-active ui-state-persist" data-icon="star">看診科別</a></li>
+					<li><a href="#page2" data-icon="star">身體部位</a></li>
+				</ul>
+			</nav>
+		</footer>
+	</div>
+	
+	<div id="page2" data-role="page" class="background">
+		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true" class="ui-panel-active"> 
+			<ul data-role="listview">
+			  <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>			  
+			</ul>
+		</div>
+		<header data-role="header" data-position="fixed">
+			<a data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+			<h1>找症狀</h1>
+			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+		</header>
+		
+		<section data-role="page main" class="ui-content">
+			<form class="ui-filterable">
+				<input id="myFilter2" data-type="search" placeholder="請輸入您要查詢的身體部位">
+			</form>
+			<ul id="list2" data-role="listview" data-filter="true" data-input="#myFilter2" data-inset="true">
+				<!--
+				<li><a href="#">頭</a></li>
+				<li><a href="#">頸</a></li>
+				<li><a href="#">胸</a></li>
+				<li><a href="#">腹</a></li>
+				<li><a href="#">腰</a></li>
+				<li><a href="#">盆腔</a></li>
+				<li><a href="#">全身</a></li>
+				<li><a href="#">四肢</a></li>
+				<li><a href="#">生殖</a></li>
+				<li><a href="#">其他</a></li>
+				-->
+			</ul>
+		</section>
+		
+		<footer data-role="footer" data-position="fixed">
+			<nav data-role="navbar">
+				<ul>
+					<li><a href="#page1" data-icon="star">看診科別</a></li>
+					<li><a href="#" class="ui-btn-active ui-state-persist" data-icon="star">身體部位</a></li>
+				</ul>
+			</nav>
+		</footer>
+	</div>
+	
+	<div id="pageDetailList" data-role="page" class="background">
+		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true" class="ui-panel-active"> 
+			<ul data-role="listview">
+			  <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>			  
+			</ul>
+		</div>
+		<header data-role="header" data-position="fixed">
+			<a data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+			<h1>找症狀</h1>
+			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+		</header>
+		
+		<section data-role="page main" class="ui-content">
+			<form class="ui-filterable">
+				<input id="myFilter3" data-type="search" placeholder="請輸入您要查詢的症狀">
+			</form>
+			<ul id="detailList" data-role="listview" data-filter="true" data-input="#myFilter3" data-inset="true">
+			</ul>
+		</section>
+	</div>
+	
+	<div id="pageDetailItem" data-role="page" class="background">
+		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true" class="ui-panel-active"> 
+			<ul data-role="listview">
+			  <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>			  
+			</ul>
+		</div>
+		<header data-role="header" data-position="fixed">
+			<a data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+			<h1>找症狀</h1>
+			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+		</header>
+		
+		<section data-role="page main" class="ui-content">
+			<div data-role="collapsible" data-collapsed="false">
+				<h4 id="diseaseName"></h4>
+				<p id="diseaseDescription"></P>
+			</div>
+			<div data-role="collapsibleset">
+				<div data-role="collapsible">
+					<h3>英文名稱</h3>
+					<p id="diseaseEnglishName"></p>
+				</div>
+				<div data-role="collapsible">
+					<h3>身體部位</h3>
+					<p id="diseaseBodyPosition"></p>
+				</div>
+				<div data-role="collapsible">
+					<h3 >症狀</h3>
+					<p id="diseaseSymptom"></p>
+				</div>
+				<div data-role="collapsible">
+					<h3>併發病症</h3>
+					<p id="diseaseComplication"></p>
+				</div>
+				<div data-role="collapsible">
+					<h3>好發族群</h3>
+					<p id="diseasePredilectionGroups"></p>
+				</div>
+				<div data-role="collapsible">
+					<h3>疾病病因</h3>
+					<p id="diseaseCause"></p>
+				</div>
+				<div data-role="collapsible">
+					<h3>預防與治療</h3>
+					<p id="diseasePreventionAndTreatment"></p>
+				</div>
+			</div>
+		</section>
+		
+		<footer data-role="footer" data-position="fixed">
+			<h1>就診科別：<span id="diseaseDivision"></span></h1>
+		</footer>
+	</div>
+	
+</body>
+
+</html>

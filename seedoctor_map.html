@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+	<meta charset="utf-8">
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	
+	<!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
+	<link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
+	<link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
+	<!--<link rel="stylesheet" href="css/mystyle.css">-->
+	<!--<script src="js/*.js">-->
+	<!--<link rel="stylesheet" href="css/main.css">-->
+	
+	<!--Theme-->
+	<link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
+	<link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
+	
+	<link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
+	
+	<script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
+	<script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
+	<script type='text/javascript' src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.js'></script>
+	
+	<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+	<style>
+
+	tr:nth-child(even) {
+		background: #FFFFFF;
+	}
+	html,body,#map_canvas{
+		height: 100%;
+		margin: 0px;
+		padding: 0px;
+      }
+
+
+	</style>
+
+	<script>
+	var geocoder = new google.maps.Geocoder();
+    var map;
+	var c=0;
+	var markers = [];
+	var hospital=[];
+	$(document).ready(function() {
+			$.ajax({
+				type: "GET",
+				url: "hospital.csv",
+				dataType: "text",
+				success: function(data) {processData(data);}
+				});
+			
+			});
+	function processData(allText) {
+			if (navigator && navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(parsePosition);
+			}
+	
+	function parsePosition(pos) {
+			var curLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+			var mapOptions = {
+				zoom: 13,
+				center: curLatLng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP //正常2D道路模式
+                };
+                    //在指定DOM元素中嵌入地圖
+            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			console.log(curLatLng);
+			var marker = new google.maps.Marker({
+                position: curLatLng,
+                title: "現在位置",
+                //借用前篇文章介紹的Canvas.toDataURL()產生動態圖檔作為圖示                   
+                map: map,
+				icon:'http://www.google.com/mapfiles/ms/micons/campground.png'
+                });
+			var bounds = new google.maps.LatLngBounds();
+		    locationjson = "http://maps.google.com/maps/api/geocode/json?latlng="+ pos.coords.latitude +","+pos.coords.longitude+"&language=zh-TW&sensor=true";	                    
+			$.getJSON(locationjson,function(data){ 
+				for (i = 0; i < (data.results[0].address_components.length); i++) {
+	                if((data.results[0].address_components[i].types[0]) == 'administrative_area_level_1'){
+					var adress = (data.results[0].address_components[i].long_name);
+					
+					}
+				}	 
+				var allTextLines = allText.split(/\r\n|\n/);				
+				for(var i=1; i<allTextLines.length;i++){
+				    var data = allTextLines[i].split(',');
+					var addr=data[2][0]+data[2][1]+data[2][2];
+					if(adress == addr){
+					
+							
+					geocoding(data);
+					
+					
+													
+				}	
+			}
+		//	setTimeout(function() {
+			function geocoding(data){
+			setTimeout(function() {
+			     geocoder.geocode({ 'address': data[2] }, function (results, status) {
+					
+						//檢查執行結果
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var loc = results[0].geometry.location;
+							console.log(data);
+							var contentstr ="<div><a href='#page2' onclick=post('"+data[0]+"','"+data[1]+"','"+data[2]+"') style:='color:black;'><h3>"+data[0]+"</h3></a></div><div>"+data[1]+"</div><div>"+data[2]+"</div>"
+							var infowindow = new google.maps.InfoWindow({
+							    content: contentstr
+							});
+							var latlng =new google.maps.LatLng(loc.lat(), loc.lng());
+							var markers = new google.maps.Marker({
+								position: latlng,
+								title: data[0],
+								map:map
+							});
+							google.maps.event.addListener(markers, 'click', function() {
+							infowindow.open(map,markers);
+							});
+							
+                        /**   markers.push({
+										title: hospital[0],
+										phone: hospital[1],
+										address: data[2],
+										latlng: new google.maps.LatLng(loc.lat(), loc.lng())
+										});   */
+							};
+					
+                      /*  var m = markers[i];
+						var bounds = new google.maps.LatLngBounds();
+                        //將此座標納入檢視範圍
+                        
+                        var marker = new google.maps.Marker({
+                            position: m.latlng,
+                            title: m.title,
+                            map: map
+                        });
+                    	
+						map.fitBounds(bounds);	
+						})*/
+						});
+						},c++ *800);
+			}
+		//	},c++ *1000);
+			
+		});
+	}
+	
+}
+
+		function post(name,phone,address){
+		var hospitalname=name;
+		var hospitalphone=phone;
+		var hospitaladdress=address;
+		
+		
+		var markers = [];
+		var latlng;
+        geocoder = new google.maps.Geocoder();
+		
+		geocoder.geocode( { 'address': hospitaladdress }, function(results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+							var loc = results[0].geometry.location;
+							markers.push({title: hospitalname,
+										  latlng:new google.maps.LatLng(loc.lat(), loc.lng())
+										});
+							console.log(hospitaladdress);
+							
+							
+						var mapOptions = {
+						zoom: 18,
+						center:markers[0].latlng,
+						mapTypeId: google.maps.MapTypeId.ROADMAP,
+						disableDefaultUI: true
+						//正常2D道路模式	
+						};
+						console.log(markers[0].latlng);
+		         //在指定DOM元素中嵌入地圖
+                var map = new google.maps.Map(
+                        document.getElementById("map_canvas"), mapOptions);
+				
+                //使用LatLngBounds統計檢視範圍
+				
+				var marker = new google.maps.Marker({
+                        position: markers[0].latlng,
+                        map: map
+                    });
+								
+				}
+			});		
+						
+		//	document.getElementById("hospital1").innerHTML=hospitalname;
+			//document.getElementById("hospital2").innerHTML=hospitaladdress.slice(0,(hospitaladdress.search('區')+1));
+			document.getElementById("guide").setAttribute("href","https://www.google.com/maps/dir//"+hospitalname+"/");
+			document.getElementById("phone1").setAttribute =("href","tel:"+hospitalphone);
+		//	document.getElementById("phone2").innerHTML="撥打電話 "+hospitalphone;
+		}
+	</script>
+	
+</head >
+
+<body>
+	
+	<div id="page1" data-role="page" class="background">
+		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true" class="ui-panel-active"> 
+			<ul data-role="listview">
+			  <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>			  
+			</ul>
+		</div>
+		<header data-role="header" data-position="fixed">
+			<a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+			<h1>看診去</h1>
+			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+			<input type="search" name="search-mini" id="search-mini" value="" data-mini="true"  />
+		</header>
+        
+		
+		<div data-role="main" class="ui-content" id="map_canvas" style="height:526px;" >
+		
+		</div>
+
+		<footer data-role="footer" data-position="fixed" style="text-align:center">
+			<div  data-role="controlgroup" data-type="horizontal">
+				<a href="seedoctor_map.html"  rel="external" class="ui-btn ui-btn-active">地圖</a>
+				<a href="seedoctor_list.html" rel="external" class="ui-btn  ">列表</a>
+			</div>
+		</footer>
+	</div>
+		
+	<div id="page2" data-role="page" class="background">
+		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true" class="ui-panel-active"> 
+			<ul data-role="listview">
+			  <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>				  
+			</ul>
+		</div>
+		<header data-role="header" data-position="fixed">
+			<a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+			<h1>看診去</h1>
+			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+		</header>
+		
+		<div data-role="main">
+		
+		<ul data-role="listview" data-inset="true" id="list2">
+		<li>
+			<a href='#' style='background-color:Orange; border:0px;' class="ui-btn">
+				<div id='map_canvas' style='height:80px; width:80px; float:left;'></div>
+				<div style="float:left;margin-left:20px; margin-top:20px;">
+				<div id='hospital1' style="font-size:20px; text-shadow:none;"></div>
+				<div id='hospital2' style="font-size:15px; text-shadow:none; color:gray;"></div>
+				</div>
+			</a>
+		</li>
+		</br>
+		</br>
+		<li><a href="#" id="guide" class='ui-btn ui-icon-location ui-btn-icon-left ui-nodisc-icon ui-alt-icon' style='background-color:navajowhite; border:0px; '><div>導航</div></a></li>
+		<li><a href="#" id="phone1" class='ui-btn ui-icon-phone ui-btn-icon-left ui-nodisc-icon ui-alt-icon' style='background-color:white; border:0px; '><div id="phone2"></div></a></li>
+		</br>
+		<li><a href="#" class='ui-btn ui-icon-comment ui-btn-icon-left ui-nodisc-icon ui-alt-icon' style='background-color:navajowhite; border:0px;'><div>查詢門診(開發中)</div></a></li>
+		</ul>
+		
+		</div>
+		
+		<footer data-role="footer" data-position="fixed" style="text-align:center">
+			<div  data-role="controlgroup" data-type="horizontal">
+				<a href="seedoctor_map.html"  rel="external" class="ui-btn ui-btn-active">地圖</a>
+				<a href="seedoctor_list.html" rel="external" class="ui-btn ">列表</a>
+			</div>
+		</footer>
+	</div>
+
+</body>
+
+</html>

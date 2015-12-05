@@ -1,0 +1,14 @@
+﻿#loadingDiv {
+    display: none;
+    text-align: center;
+}
+
+.page_number {
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.hot_categories a {
+    margin-left: 3px;
+    cursor: pointer;
+}
