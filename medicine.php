@@ -1,6 +1,5 @@
 <?php
 $searchValue = $_POST["searchValue"];
-
 ini_set('memory_limit', '1G');
 
 $str = file_get_contents('Medicinal_ingredient_information.json');
