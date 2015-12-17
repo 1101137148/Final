@@ -8,8 +8,6 @@ $json = substr($json,3);
 
 $data = json_decode($json,true);
 
-//echo $data[0]['疫苗中文名稱'];
-//echo $data[0]['疫苗英文簡稱'];
 $msg ="<div data-role='main' class='ui-content'>";
 $msg.="<ul data-role='listview' class='ui-listview'>";  
 
