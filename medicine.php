@@ -30,7 +30,7 @@ for( $i = 0 ; $i<$lenght;$i++){
 		$msg .= "</div>";
 		array_push($msgArray, $msg);
 	}else {
-            if ($pos == true){
+            if ($pos){
 		$msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
 		$msg .="<h3>中文品名:" . $json[$i]['中文品名']. "</h3><p><h4>適應症 : " . $json[$i]['適應症'];
 		$msg .= "<br>主成分略述 : " . $json[$i]['主成分略述'] . "</h4></p>";
