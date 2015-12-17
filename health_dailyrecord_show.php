@@ -1,13 +1,10 @@
 <?php
-$db_host = 'db.mis.kuas.edu.tw';
-$db_name = 's1101137114';
-$db_user = 's1101137114';
-$db_password ='hatedb';
-$dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8";
+
+require_once './db.inc.php';
 
 try 
 {
-    $db = new PDO($dsn, $db_user, $db_password);
+    $db = init_db();
 
 	//* 顯示Table紀錄 *//
 	$table_stmt = $db->query("SELECT * FROM dailyrecord");

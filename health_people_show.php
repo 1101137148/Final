@@ -1,13 +1,10 @@
 <?php
-$db_host = 'db4free.net';
-$db_name = 'onekeyonhand';
-$db_user = 'onekeyonhand';
-$db_password ='md44223';
-$dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8";
+
+require_once './db.inc.php';
 
 try 
 {
-    $db = new PDO($dsn, $db_user, $db_password);
+    $db = init_db();
 	
 	//* 顯示個人資料  *//
 	$stmt = $db->prepare("SELECT * FROM People WHERE people_id=?");

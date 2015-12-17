@@ -1,11 +1,8 @@
 <?php
-$VaccineDate=$_POST['VaccineDate'];
 
-$db_host = 'db.mis.kuas.edu.tw';
-$db_name = 's1101137114';
-$db_user = 's1101137114';
-$db_password ='hatedb';
-$dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8";
+require_once './db.inc.php';
+
+$VaccineDate=$_POST['VaccineDate'];
 
 header('Content-Type: text/html; charset=utf-8');
 $json = file_get_contents('http://opendata.hccg.gov.tw/dataset/207305c0-89a3-47a5-9782-bfa3b0b68406/resource/6de34822-7fc4-44d8-a377-6d70e2d50cb0/download/20150303145533754.json');
@@ -21,7 +18,7 @@ $msg.="<ul data-role='listview' class='ui-listview'>";
 
 try 
 {
-    $db = new PDO($dsn, $db_user, $db_password);
+    $db = init_db();
 	
 	//* 設定疫苗日期 *//
 	$insert_SetVaccineDate = $db->exec("INSERT INTO `setvaccinedate`(`VaccineDate1`, `VaccineDate2`, `VaccineDate3`, `VaccineDate4`, `VaccineDate5`, `VaccineDate6`, `VaccineDate7`, `VaccineDate8`) VALUES ('".$VaccineDate[1]."','".$VaccineDate[2]."','".$VaccineDate[3]."','".$VaccineDate[4]."','".$VaccineDate[5]."','".$VaccineDate[6]."','".$VaccineDate[7]."','".$VaccineDate[8]."')");

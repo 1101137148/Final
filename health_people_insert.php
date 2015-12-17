@@ -1,4 +1,7 @@
 <?php
+
+require_once './db.inc.php';
+
 $people_id=$_POST['people_id'];
 $today_date=$_POST['today_date'];
 $height=$_POST['height'];
@@ -8,15 +11,9 @@ $d_pressure=$_POST['d_pressure'];
 $f_bloodglucose=$_POST['f_bloodglucose'];
 $l_bloodglucose=$_POST['l_bloodglucose'];
 
-$db_host = 'db.mis.kuas.edu.tw';
-$db_name = 's1101137114';
-$db_user = 's1101137114';
-$db_password ='hatedb';
-$dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8";
-
 try 
 {
-    $db = new PDO($dsn, $db_user, $db_password);
+    $db = init_db();
 	
 	//* 新增健康紀錄 *//
 	$insert_DailyRecord = $db->exec("INSERT INTO `dailyrecord` (`daily_record_id`, `today_date`, `height`, `weight`, `s_pressure`, `d_pressure`, `f_bloodglucose`, `l_bloodglucose`, `people_id`) VALUES (NULL, '". $today_date ."', '". $height ."', '". $weight ."', '". $s_pressure ."', '". $d_pressure ."', '". $f_bloodglucose ."', '". $l_bloodglucose ."', '". $people_id ."');");
