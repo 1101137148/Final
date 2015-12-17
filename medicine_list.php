@@ -1,6 +1,6 @@
 <?php
 
-require_once './db.inc.php';
+include './db.inc.php';
 
 $msg ="<div data-role='main' class='ui-content'>";
 $msg.="<ul data-role='listview' class='ui-listview'>";  

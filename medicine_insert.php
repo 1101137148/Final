@@ -1,6 +1,6 @@
 <?php
 
-require_once './db.inc.php';
+include './db.inc.php';
 
 $medicine_name=$_POST['medicine_name'];
 $start_time=$_POST['start_time'];

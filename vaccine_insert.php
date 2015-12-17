@@ -1,6 +1,6 @@
 <?php
 
-require_once './db.inc.php';
+include './db.inc.php';
 
 $checkbox=$_POST['checkbox'];
 

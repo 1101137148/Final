@@ -1,6 +1,6 @@
 <?php
 
-require_once './db.inc.php';
+include './db.inc.php';
 
 $people_id=$_POST['people_id'];
 $today_date=$_POST['today_date'];

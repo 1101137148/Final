@@ -1,6 +1,6 @@
 <?php
 
-require_once './db.inc.php';
+include './db.inc.php';
 
 $VaccineDate=$_POST['VaccineDate'];
 
