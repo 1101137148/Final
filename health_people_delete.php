@@ -1,5 +1,4 @@
 <?php
-
 include './db.inc.php';
 
 $daily_record_id_d=$_POST['daily_record_id_d'];

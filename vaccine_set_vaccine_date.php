@@ -1,5 +1,4 @@
 <?php
-
 include './db.inc.php';
 
 $VaccineDate=$_POST['VaccineDate'];

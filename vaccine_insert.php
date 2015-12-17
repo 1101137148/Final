@@ -1,5 +1,4 @@
 <?php
-
 include './db.inc.php';
 
 $checkbox=$_POST['checkbox'];

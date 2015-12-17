@@ -1,5 +1,4 @@
 <?php
-
 include './db.inc.php';
 
 $medicine_name=$_POST['medicine_name'];

@@ -1,5 +1,4 @@
 <?php
-
 include './db.inc.php';
 
 $msg ="<div data-role='main' class='ui-content'>";

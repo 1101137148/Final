@@ -1,5 +1,4 @@
 <?php
-
 include './db.inc.php';
 
 $people_id=$_POST['people_id'];
