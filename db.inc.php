@@ -8,4 +8,5 @@ function init_db() {
     $db = new PDO($db_dsn, $db_user, $db_password);
     return $db;
 }
+
 ?>
