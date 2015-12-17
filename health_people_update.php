@@ -14,13 +14,7 @@ try
 					
 	if($update_count){
 	$update_row=$update_stmt->fetch();
-		
-				
-		//<!-- Modal -->
-		//$u_window =	"<div class='modal fade' id='myUpdate' role='dialog'>";
-		//$u_window.="<div class='modal-dialog'>";
-    
-			//<!-- Modal content-->
+
 			$u_window = '<div class="ui-popup-container fade in ui-popup-active" id="updateDialog-popup" style="width: 260px; top: 64.5px; left: 57.5px;"><div data-role="popup" id="myUpdateDialog" class="ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">';
 			$u_window.= '<div data-role="header" role="banner" class="ui-header ui-bar-inherit">';
 			$u_window.= '<a href="#health_people.html" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back" data-role="button" role="button"></a>';
@@ -43,9 +37,7 @@ try
 			$u_window.= '<h1 class="ui-title" role="heading" aria-level="1"><button data-rel="back" onclick="update_health_record()" class=" ui-btn ui-shadow ui-corner-all">送出</button></h1>';
 			$u_window.= '</div>';
 			$u_window.= '</div>';
-			//$u_window.=	"<button type='submit' class='btn btn-default'>送出</button>";
-			//$u_window.=	"<div class='modal-footer'><button type='button' class='btn btn-default' data-dismiss='modal'>取消</button></div>";
-			//$u_window.=	" </div></div></div>";
+
 	}
 	echo $u_window;
 } 

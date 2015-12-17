@@ -1,6 +1,5 @@
 <?php
 $searchValue = $_POST["searchValue"];
-//$searchValue = "感冒";
 
 ini_set('memory_limit', '1G');
 
@@ -14,7 +13,6 @@ $str = mb_substr($str,2,-1,'utf-8');
 $str = "[".$str."]";
 
 $json = json_decode($str,true);
-//echo '<pre>' . print_r($json) . '</pre>';
 
 $msgArray =[];
 $lenght = count($json);
@@ -39,7 +37,5 @@ for( $i = 0 ; $i<$lenght;$i++){
 		array_push($msgArray, $msg);
 	}
 }
-//echo '<pre>' . print_r($msgArray) . '</pre>';
 echo json_encode($msgArray);
-//echo json_encode($locationJson);
 ?>

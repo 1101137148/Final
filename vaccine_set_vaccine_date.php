@@ -11,8 +11,6 @@ $json = substr($json,3);
 
 $data = json_decode($json,true);
 
-//echo $data[0]['疫苗中文名稱'];
-//echo $data[0]['疫苗英文簡稱'];
 $msg ="<div data-role='main' class='ui-content'>";
 $msg.="<ul data-role='listview' class='ui-listview'>";  
 
@@ -20,7 +18,6 @@ try
 {
     $db = init_db();
 	
-	//* 設定疫苗日期 *//
 	$insert_SetVaccineDate = $db->exec("INSERT INTO `setvaccinedate`(`VaccineDate1`, `VaccineDate2`, `VaccineDate3`, `VaccineDate4`, `VaccineDate5`, `VaccineDate6`, `VaccineDate7`, `VaccineDate8`) VALUES ('".$VaccineDate[1]."','".$VaccineDate[2]."','".$VaccineDate[3]."','".$VaccineDate[4]."','".$VaccineDate[5]."','".$VaccineDate[6]."','".$VaccineDate[7]."','".$VaccineDate[8]."')");
 	
 	$vaccine_lastID = $db->query("SELECT MAX(checkbox_id) as lastID FROM vaccine");

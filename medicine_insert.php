@@ -11,16 +11,7 @@ $result=$_POST['result'];
 
 $msg ="<div data-role='main' class='ui-content'>";
 $msg.="<ul data-role='listview' class='ui-listview'>";  
-/*
-    if($alarm = "false"){
-	   $alarm_checked = "off";
-	}
-	else if($alarm = "true"){
-	   $alarm_checked = "on";
-	}
-	else{
-	}
-*/
+
 try 
 {
     $db = init_db();
@@ -29,7 +20,6 @@ try
 	
 	//* 新增藥品提醒 *//
 	$insert_medicine = $db->exec("INSERT INTO `medicine`(`medicine_name`, `start_time`, `stop_time`, `interval_hour`, `ps`, `result`) VALUES ('".$medicine_name."', '".$start_time."', '".$stop_time."', '".$interval_hour."', '".$ps."', '".$result."');");
-	//
 	
 	//* 顯示藥品提醒 *//
 	$medicine_stmt = $db->query("SELECT * FROM medicine");
