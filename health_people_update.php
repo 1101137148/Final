@@ -1,8 +1,6 @@
 <?php
 include './db.inc.php';
-
 $daily_record_id_u=$_POST['daily_record_id_u'];
-
 try 
 {
     $db = init_db();

@@ -1,6 +1,5 @@
 <?php
 include './db.inc.php';
-
 try 
 {
     $db = init_db();

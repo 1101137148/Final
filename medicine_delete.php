@@ -1,11 +1,8 @@
 <?php
 include './db.inc.php';
-
 $medicine_id=$_POST['medicine_id'];
-
 $msg ="<div data-role='main' class='ui-content'>";
 $msg.="<ul data-role='listview' class='ui-listview'>";  
-
 try 
 {
     $db = init_db();

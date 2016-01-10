@@ -1,6 +1,5 @@
 <?php
 include './db.inc.php';
-
 $people_id=$_POST['people_id'];
 $today_date=$_POST['today_date'];
 $height=$_POST['height'];
@@ -9,7 +8,6 @@ $s_pressure=$_POST['s_pressure'];
 $d_pressure=$_POST['d_pressure'];
 $f_bloodglucose=$_POST['f_bloodglucose'];
 $l_bloodglucose=$_POST['l_bloodglucose'];
-
 try 
 {
     $db = init_db();

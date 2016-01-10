@@ -1,18 +1,14 @@
 <?php
 $searchValue = $_POST["searchValue"];
 ini_set('memory_limit', '1G');
-
 $str = file_get_contents('Medicinal_ingredient_information.json');
-
 $str = str_replace("{","",$str);
 $str = str_replace("}","",$str);
 $str = str_replace("[","{",$str);
 $str = str_replace("]","}",$str);
 $str = mb_substr($str,2,-1,'utf-8');
 $str = "[".$str."]";
-
 $json = json_decode($str,true);
-
 $msgArray =[];
 $lenght = count($json);
 for( $i = 0 ; $i<$lenght;$i++){
@@ -37,7 +33,6 @@ for( $i = 0 ; $i<$lenght;$i++){
 		array_push($msgArray, $msg);
             }
         }
-        
 }
 echo json_encode($msgArray);
 ?>

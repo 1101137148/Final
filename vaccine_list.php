@@ -1,16 +1,11 @@
 <?php
 include './db.inc.php';
-
 header('Content-Type: text/html; charset=utf-8');
 $json = file_get_contents('http://opendata.hccg.gov.tw/dataset/207305c0-89a3-47a5-9782-bfa3b0b68406/resource/6de34822-7fc4-44d8-a377-6d70e2d50cb0/download/20150303145533754.json');
-
 $json = substr($json,3);
-
 $data = json_decode($json,true);
-
 $msg ="<div data-role='main' class='ui-content'>";
-$msg.="<ul data-role='listview' class='ui-listview'>";  
-
+$msg.="<ul data-role='listview' class='ui-listview'>";
 try 
 {
     $db = init_db();
