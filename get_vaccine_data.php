@@ -1,9 +1,9 @@
 <?php
-    $CName = $_GET['CName'];
-    $EName = $_GET['EName'];
-    $Date = $_GET['Date'];
-    $Times = $_GET['Times'];
-    $VaccineDate = $_GET['VaccineDate'];
+$CName = $_GET['CName'];
+$EName = $_GET['EName'];
+$Date = $_GET['Date'];
+$Times = $_GET['Times'];
+$VaccineDate = $_GET['VaccineDate'];
 ?>
 <!doctype html>
 <html lang="zh">
