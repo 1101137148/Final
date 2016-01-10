@@ -1,11 +1,11 @@
 <?php
-$u_medicine_id = $_GET['u_medicine_id'];
-$u_medicine_name = $_GET['u_medicine_name'];
-$u_start_time = $_GET['u_start_time'];
-$u_stop_time = $_GET['u_stop_time'];
-$u_interval_hour = $_GET['u_interval_hour'];
-$u_ps = $_GET['u_ps'];
-$u_result = $_GET['u_result'];
+	$u_medicine_id = $_GET['u_medicine_id'];
+	$u_medicine_name = $_GET['u_medicine_name'];
+	$u_start_time = $_GET['u_start_time'];
+	$u_stop_time = $_GET['u_stop_time'];
+	$u_interval_hour = $_GET['u_interval_hour'];
+	$u_ps = $_GET['u_ps'];
+	$u_result = $_GET['u_result'];
 ?>
 <!doctype html>
 <html lang="zh">
