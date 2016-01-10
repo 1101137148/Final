@@ -1,11 +1,12 @@
 <?php
     include './db.inc.php';
-    $medicine_name = $_POST['medicine_name'];
-    $start_time = $_POST['start_time'];
-    $stop_time = $_POST['stop_time'];
-    $interval_hour = $_POST['interval_hour'];
-    $ps = $_POST['ps'];
-    $result = $_POST['result'];
+    $medicine_name = htmlspecialchars($_POST['medicine_name']);
+    $start_time = htmlspecialchars($_POST['start_time']);
+    $stop_time = htmlspecialchars($_POST['stop_time']);
+    $interval_hour = htmlspecialchars($_POST['interval_hour']);
+    $ps = htmlspecialchars($_POST['ps']);
+    $result = htmlspecialchars($_POST['result']);
+    
     $msg = "<div data-role='main' class='ui-content'>";
     $msg.="<ul data-role='listview' class='ui-listview'>";
 

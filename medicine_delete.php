@@ -10,7 +10,8 @@
         $delete_stmt = $db->prepare("SELECT * FROM medicine WHERE medicine_id=?");
         $delete_count = $delete_stmt->execute(array($medicine_id));
         if ($delete_count) {
-            $delete_medicine = $db->exec("DELETE FROM `medicine` WHERE `medicine`.`medicine_id` = '" . $medicine_id . "';");
+            $delete_medicine_stmt = $db->prepare("DELETE FROM `medicine` WHERE `medicine`.`medicine_id` = ?;");
+            $delete_medicine_count = $delete_medicine_stmt->execute(array($medicine_id));
         }
 
         //* 顯示藥品提醒 *//
