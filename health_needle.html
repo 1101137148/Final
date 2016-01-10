@@ -1,355 +1,355 @@
 <!doctype html>
 <html lang="zh">
 
-<head>
-	<meta charset="utf-8">
-	<title>Page Title</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	
-	<!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
-	<link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
-	<link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
-	<!--<link rel="stylesheet" href="css/mystyle.css">-->
-	<!--<script src="js/*.js">-->
-	<!--<link rel="stylesheet" href="css/main.css">-->
-	
-	<!--Theme-->
-	<link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
-	<link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
-	<link rel="stylesheet" href="css/health.css">
-	
-	<script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
-	<script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
-	
-	
-	<style>
-	</style>
+    <head>
+        <meta charset="utf-8">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
 
-	<script type="application/javascript">
-		
-		$(function(){
-			showList();
-			showVaccineDate();
-		});
+        <!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
+        <link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
+        <link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
+        <!--<link rel="stylesheet" href="css/mystyle.css">-->
+        <!--<script src="js/*.js">-->
+        <!--<link rel="stylesheet" href="css/main.css">-->
 
-		
-		$(document).on( "click", ".show-page-loading-msg", function() {
-		  var $this = $( this ),
-		  theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
-		  msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
-		  textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
-		  textonly = !!$this.jqmData( "textonly" );
-		  html = $this.jqmData( "html" ) || "";
-		$.mobile.loading( 'show', {
-		  text: msgText,
-		  textVisible: textVisible,
-		  theme: theme,
-		  textonly: textonly,
-		  html: html
-		  });
-		  fadeOut();
-			
-		})
-		.on( "click", ".hide-page-loading-msg", function() {
-		  $.mobile.loading( "hide" );
-		});
-		
-		function fadeOut() {
-			setTimeout('$.mobile.loading( "hide" )', 1000);
-		}
-		
-		
-		function showList() {
-		
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} 
-			else    { // code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-						}
-					}
-					xmlhttp.open("GET", "vaccine_list.php",  true);
-					xmlhttp.send();
-		}
-		
-		function onSaveBtnClick(str) {
+        <!--Theme-->
+        <link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
+        <link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
+        <link rel="stylesheet" href="css/health.css">
 
-		var myCheckbox1 = document.getElementById('checkbox[1]');
-		var myCheckbox2 = document.getElementById('checkbox[2]');
-        var myCheckbox3 = document.getElementById('checkbox[3]');
-		var myCheckbox4 = document.getElementById('checkbox[4]');
-        var myCheckbox5 = document.getElementById('checkbox[5]');    
-		var myCheckbox6 = document.getElementById('checkbox[6]');
-        var myCheckbox7 = document.getElementById('checkbox[7]');    
-		var myCheckbox8 = document.getElementById('checkbox[8]');
-		var xmlhttp;
-        if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                
-                xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    }
-                }
-                xmlhttp.open("POST", "vaccine_insert.php", true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send("checkbox[1]=" + myCheckbox1.checked + "&checkbox[2]=" + myCheckbox2.checked + "&checkbox[3]=" + myCheckbox3.checked + "&checkbox[4]=" + myCheckbox4.checked + "&checkbox[5]=" + myCheckbox5.checked + "&checkbox[6]=" + myCheckbox6.checked + "&checkbox[7]=" +myCheckbox7.checked + "&checkbox[8]=" + myCheckbox8.checked);
-		}
-		
-		function onSetVaccineDateBtnClick(str) {
+        <script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
+        <script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
 
-		for (var i=1; i<=8; i=i+1)
-			{
-				$("#alarmDialog"+i+"-popup").fadeToggle();
-			}
-		
-		var myVaccineDate1 = document.getElementById('VaccineDate[1]');
-		var myVaccineDate2 = document.getElementById('VaccineDate[2]');
-        var myVaccineDate3 = document.getElementById('VaccineDate[3]');
-		var myVaccineDate4 = document.getElementById('VaccineDate[4]');
-        var myVaccineDate5 = document.getElementById('VaccineDate[5]');    
-		var myVaccineDate6 = document.getElementById('VaccineDate[6]');
-        var myVaccineDate7 = document.getElementById('VaccineDate[7]');    
-		var myVaccineDate8 = document.getElementById('VaccineDate[8]');
-		var xmlhttp;
-        if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                
-                xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-						document.getElementById("txtHint").innerHTML = xmlhttp.responseText;						
-                    }
-                }
-                xmlhttp.open("POST", "vaccine_set_vaccine_date.php", true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send("VaccineDate[1]=" + myVaccineDate1.value + "&VaccineDate[2]=" + myVaccineDate2.value + "&VaccineDate[3]=" + myVaccineDate3.value + "&VaccineDate[4]=" + myVaccineDate4.value + "&VaccineDate[5]=" + myVaccineDate5.value + "&VaccineDate[6]=" + myVaccineDate6.value + "&VaccineDate[7]=" + myVaccineDate7.value + "&VaccineDate[8]=" + myVaccineDate8.value);
-		}
-		
-		function showVaccineDate(){
-			var myVaccineDate1 = document.getElementById('VaccineDate[1]');
-			var myVaccineDate2 = document.getElementById('VaccineDate[2]');
-			var myVaccineDate3 = document.getElementById('VaccineDate[3]');
-			var myVaccineDate4 = document.getElementById('VaccineDate[4]');
-			var myVaccineDate5 = document.getElementById('VaccineDate[5]');    
-			var myVaccineDate6 = document.getElementById('VaccineDate[6]');
-			var myVaccineDate7 = document.getElementById('VaccineDate[7]');    
-			var myVaccineDate8 = document.getElementById('VaccineDate[8]');
-			
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} 
-			else    { // code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							//document.getElementById("test").innerHTML = xmlhttp.responseText;
-							var date = xmlhttp.responseText;
-							var get_date = date.split(',');								  
-							var get_VaccineDate = new Array();
-							for (i in get_date) {
-							get_VaccineDate[i] = get_date[i];
-							//console.log(get_date[i]);
-							}
-							myVaccineDate1.value = get_VaccineDate[0];
-							myVaccineDate2.value = get_VaccineDate[1];
-							myVaccineDate3.value = get_VaccineDate[2];
-							myVaccineDate4.value = get_VaccineDate[3];
-							myVaccineDate5.value = get_VaccineDate[4];
-							myVaccineDate6.value = get_VaccineDate[5];
-							myVaccineDate7.value = get_VaccineDate[6];
-							myVaccineDate8.value = get_VaccineDate[7];
-							/*for (var i=1; i<=8; i=i+1)
-							{
-								$("#alarm"+i).text($("#alarm"+i).text()+  get_VaccineDate[i-1])
-							}*/
-						
-						}
-					}
-					xmlhttp.open("GET", "respond_vaccine_date.php",  true);
-					xmlhttp.send();
-		}
-		
-	</script>
-</head>
 
-<body>
+        <style>
+        </style>
 
-	<div data-role="page" class="background">
-		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true"> 
-			<ul data-role="listview">
-				<li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
-		</ul>
-		</div>
-		<header data-role="header" data-position="fixed">
-			<a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
-			<h1>健康小精靈</h1>
-			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
-		</header>
-		
-		
-		<section>
-			<div class="container">
-				<div class="vaccine_context">
-					<div id="test"></div>
-					<img src="icon/smile.png"> 可點選疫苗查看詳細資料<br>
-					<img src="icon/smile.png"> 請勾選已打過的疫苗，未打的疫苗可儘快去補打喔:)<br>
-					<img src="icon/smile.png"> 自訂施打疫苗日期，做好個人疫苗紀錄!<br>
-				</div>
-				<div id="txtHint"><b>Loading...</b></div>
-			</div>		
-						<div data-role="popup" id="alarmDialog1">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
+        <script type="application/javascript">
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[1]" id="VaccineDate[1]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">設定</button>
-						  </div>
-						</div>
-					
-						<div data-role="popup" id="alarmDialog2">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
+            $(function(){
+            showList();
+            showVaccineDate();
+            });
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[2]" id="VaccineDate[2]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
-						  </div>
-						</div>
-						
-						<div data-role="popup" id="alarmDialog3">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[3]" id="VaccineDate[3]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
-						  </div>
-						</div>
-						
-						<div data-role="popup" id="alarmDialog4">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
+            $(document).on( "click", ".show-page-loading-msg", function() {
+            var $this = $( this ),
+            theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+            msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData( "textonly" );
+            html = $this.jqmData( "html" ) || "";
+            $.mobile.loading( 'show', {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+            });
+            fadeOut();
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[4]" id="VaccineDate[4]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
-						  </div>
-						</div>
-						
-						<div data-role="popup" id="alarmDialog5">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
+            })
+            .on( "click", ".hide-page-loading-msg", function() {
+            $.mobile.loading( "hide" );
+            });
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[5]" id="VaccineDate[5]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
-						  </div>
-						</div>
-						
-						<div data-role="popup" id="alarmDialog6">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
+            function fadeOut() {
+            setTimeout('$.mobile.loading( "hide" )', 1000);
+            }
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[6]" id="VaccineDate[6]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
-						  </div>
-						</div>
-						
-						<div data-role="popup" id="alarmDialog7">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[7]" id="VaccineDate[7]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
-						  </div>
-						</div>
-						
-						<div data-role="popup" id="alarmDialog8">
-						  <div data-role="header">
-							<a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
-							<h1>設定日期</h1>
-						  </div>
+            function showList() {
 
-						  <div data-role="main" class="ui-content">
-								<p>計畫打疫苗日</p>
-								<input type="date" name="VaccineDate[8]" id="VaccineDate[8]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-						  </div>
-						  <div data-role="footer">
-							<button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
-						  </div>
-						</div>
-		</section>
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
 
-		<footer data-role="footer" data-position="fixed">
-			<nav data-role="navbar">
-				<ul>
-					<li><a rel="external" href="health_people.html"><img class="icon_img" src="icon/people.png"><br>健康紀錄</a></li>
-					<li><a rel="external" href="health_needle.html" class="ui-btn-active ui-state-persist"><img class="icon_img" src="icon/needle.png"><br>疫苗紀錄</a></li>
-					<li><a rel="external" href="health_medicine.html"><img class="icon_img" src="icon/medicine.png"><br>藥品紀錄</a></li>
-				</ul>
-			</nav>
-		</footer>
-		
-	</div>
-</body>
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+            }
+            xmlhttp.open("GET", "vaccine_list.php",  true);
+            xmlhttp.send();
+            }
+
+            function onSaveBtnClick(str) {
+
+            var myCheckbox1 = document.getElementById('checkbox[1]');
+            var myCheckbox2 = document.getElementById('checkbox[2]');
+            var myCheckbox3 = document.getElementById('checkbox[3]');
+            var myCheckbox4 = document.getElementById('checkbox[4]');
+            var myCheckbox5 = document.getElementById('checkbox[5]');    
+            var myCheckbox6 = document.getElementById('checkbox[6]');
+            var myCheckbox7 = document.getElementById('checkbox[7]');    
+            var myCheckbox8 = document.getElementById('checkbox[8]');
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            }
+            }
+            xmlhttp.open("POST", "vaccine_insert.php", true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("checkbox[1]=" + myCheckbox1.checked + "&checkbox[2]=" + myCheckbox2.checked + "&checkbox[3]=" + myCheckbox3.checked + "&checkbox[4]=" + myCheckbox4.checked + "&checkbox[5]=" + myCheckbox5.checked + "&checkbox[6]=" + myCheckbox6.checked + "&checkbox[7]=" +myCheckbox7.checked + "&checkbox[8]=" + myCheckbox8.checked);
+            }
+
+            function onSetVaccineDateBtnClick(str) {
+
+            for (var i=1; i<=8; i=i+1)
+            {
+            $("#alarmDialog"+i+"-popup").fadeToggle();
+            }
+
+            var myVaccineDate1 = document.getElementById('VaccineDate[1]');
+            var myVaccineDate2 = document.getElementById('VaccineDate[2]');
+            var myVaccineDate3 = document.getElementById('VaccineDate[3]');
+            var myVaccineDate4 = document.getElementById('VaccineDate[4]');
+            var myVaccineDate5 = document.getElementById('VaccineDate[5]');    
+            var myVaccineDate6 = document.getElementById('VaccineDate[6]');
+            var myVaccineDate7 = document.getElementById('VaccineDate[7]');    
+            var myVaccineDate8 = document.getElementById('VaccineDate[8]');
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;						
+            }
+            }
+            xmlhttp.open("POST", "vaccine_set_vaccine_date.php", true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("VaccineDate[1]=" + myVaccineDate1.value + "&VaccineDate[2]=" + myVaccineDate2.value + "&VaccineDate[3]=" + myVaccineDate3.value + "&VaccineDate[4]=" + myVaccineDate4.value + "&VaccineDate[5]=" + myVaccineDate5.value + "&VaccineDate[6]=" + myVaccineDate6.value + "&VaccineDate[7]=" + myVaccineDate7.value + "&VaccineDate[8]=" + myVaccineDate8.value);
+            }
+
+            function showVaccineDate(){
+            var myVaccineDate1 = document.getElementById('VaccineDate[1]');
+            var myVaccineDate2 = document.getElementById('VaccineDate[2]');
+            var myVaccineDate3 = document.getElementById('VaccineDate[3]');
+            var myVaccineDate4 = document.getElementById('VaccineDate[4]');
+            var myVaccineDate5 = document.getElementById('VaccineDate[5]');    
+            var myVaccineDate6 = document.getElementById('VaccineDate[6]');
+            var myVaccineDate7 = document.getElementById('VaccineDate[7]');    
+            var myVaccineDate8 = document.getElementById('VaccineDate[8]');
+
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            //document.getElementById("test").innerHTML = xmlhttp.responseText;
+            var date = xmlhttp.responseText;
+            var get_date = date.split(',');								  
+            var get_VaccineDate = new Array();
+            for (i in get_date) {
+            get_VaccineDate[i] = get_date[i];
+            //console.log(get_date[i]);
+            }
+            myVaccineDate1.value = get_VaccineDate[0];
+            myVaccineDate2.value = get_VaccineDate[1];
+            myVaccineDate3.value = get_VaccineDate[2];
+            myVaccineDate4.value = get_VaccineDate[3];
+            myVaccineDate5.value = get_VaccineDate[4];
+            myVaccineDate6.value = get_VaccineDate[5];
+            myVaccineDate7.value = get_VaccineDate[6];
+            myVaccineDate8.value = get_VaccineDate[7];
+            /*for (var i=1; i<=8; i=i+1)
+            {
+            $("#alarm"+i).text($("#alarm"+i).text()+  get_VaccineDate[i-1])
+            }*/
+
+            }
+            }
+            xmlhttp.open("GET", "respond_vaccine_date.php",  true);
+            xmlhttp.send();
+            }
+
+        </script>
+    </head>
+
+    <body>
+
+        <div data-role="page" class="background">
+            <div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true"> 
+                <ul data-role="listview">
+                    <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
+                </ul>
+            </div>
+            <header data-role="header" data-position="fixed">
+                <a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+                <h1>健康小精靈</h1>
+                <a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+            </header>
+
+
+            <section>
+                <div class="container">
+                    <div class="vaccine_context">
+                        <div id="test"></div>
+                        <img src="icon/smile.png"> 可點選疫苗查看詳細資料<br>
+                        <img src="icon/smile.png"> 請勾選已打過的疫苗，未打的疫苗可儘快去補打喔:)<br>
+                        <img src="icon/smile.png"> 自訂施打疫苗日期，做好個人疫苗紀錄!<br>
+                    </div>
+                    <div id="txtHint"><b>Loading...</b></div>
+                </div>		
+                <div data-role="popup" id="alarmDialog1">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[1]" id="VaccineDate[1]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">設定</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="alarmDialog2">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[2]" id="VaccineDate[2]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="alarmDialog3">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[3]" id="VaccineDate[3]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="alarmDialog4">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[4]" id="VaccineDate[4]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="alarmDialog5">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[5]" id="VaccineDate[5]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="alarmDialog6">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[6]" id="VaccineDate[6]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="alarmDialog7">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[7]" id="VaccineDate[7]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
+                    </div>
+                </div>
+
+                <div data-role="popup" id="alarmDialog8">
+                    <div data-role="header">
+                        <a href="#" class="ui-btn-left ui-btn ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-inline ui-shadow ui-corner-all" data-rel="back"></a>
+                        <h1>設定日期</h1>
+                    </div>
+
+                    <div data-role="main" class="ui-content">
+                        <p>計畫打疫苗日</p>
+                        <input type="date" name="VaccineDate[8]" id="VaccineDate[8]" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                    </div>
+                    <div data-role="footer">
+                        <button data-rel="back" onclick="onSetVaccineDateBtnClick(this)"  class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="已保存" style="margin-left: 36%;">保存</button>
+                    </div>
+                </div>
+            </section>
+
+            <footer data-role="footer" data-position="fixed">
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a rel="external" href="health_people.html"><img class="icon_img" src="icon/people.png"><br>健康紀錄</a></li>
+                        <li><a rel="external" href="health_needle.html" class="ui-btn-active ui-state-persist"><img class="icon_img" src="icon/needle.png"><br>疫苗紀錄</a></li>
+                        <li><a rel="external" href="health_medicine.html"><img class="icon_img" src="icon/medicine.png"><br>藥品紀錄</a></li>
+                    </ul>
+                </nav>
+            </footer>
+
+        </div>
+    </body>
 
 </html>

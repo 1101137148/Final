@@ -1,303 +1,303 @@
 <!doctype html>
 <html lang="zh">
 
-<head>
-	<meta charset="utf-8">
-	<title>Page Title</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	
-	<!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
-	<link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
-	<link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
-	<!--<link rel="stylesheet" href="css/mystyle.css">-->
-	<!--<script src="js/*.js">-->
-	<!--<link rel="stylesheet" href="css/main.css">-->
-	
-	<!--Theme-->
-	<link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
-	<link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
-	<link rel="stylesheet" href="css/health.css">
-	
-	<script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
-	<script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
-	
-	
-	<style>
-	</style>
+    <head>
+        <meta charset="utf-8">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
 
-	<script type="application/javascript">
-		
-		$(function(){
-			showList();
-		});
+        <!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
+        <link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
+        <link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
+        <!--<link rel="stylesheet" href="css/mystyle.css">-->
+        <!--<script src="js/*.js">-->
+        <!--<link rel="stylesheet" href="css/main.css">-->
 
-		
-		$(document).on( "click", ".show-page-loading-msg", function() {
-		  var $this = $( this ),
-		  theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
-		  msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
-		  textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
-		  textonly = !!$this.jqmData( "textonly" );
-		  html = $this.jqmData( "html" ) || "";
-		$.mobile.loading( 'show', {
-		  text: msgText,
-		  textVisible: textVisible,
-		  theme: theme,
-		  textonly: textonly,
-		  html: html
-		  });
-		  fadeOut();
-			
-		})
-		.on( "click", ".hide-page-loading-msg", function() {
-		  $.mobile.loading( "hide" );
-		});
-		
-		function fadeOut() {
-			setTimeout('$.mobile.loading( "hide" )', 1000);
-		}
-		
-		
-		function showList() {
-		
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} 
-			else    { // code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-						}
-					}
-					xmlhttp.open("GET", "medicine_list.php",  true);
-					xmlhttp.send();
-		}
-		
-		function send_medicine_btn(){
-		
-			$("#myPopupDialog-popup").fadeToggle();
-		
-			var myMedicine_name = document.getElementById('medicine_name');
-			var myStart_time = document.getElementById('start_time');
-			var myStop_time = document.getElementById('stop_time');
-			var myInterval_hour = document.getElementById('interval_hour');
-			var myPs = document.getElementById('ps');
-			var myResult = document.getElementById('result');
-			console.log(myMedicine_name.value);
-			console.log(myStart_time.value);
-			console.log(myStop_time.value);
-			console.log(myInterval_hour.value);
-			console.log(myPs.value);
-			console.log(myResult.value);
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} 
-			else    { // code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-						}
-					}
-					xmlhttp.open("POST", "medicine_insert.php", true);
-					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					xmlhttp.send("&medicine_name=" + myMedicine_name.value + "&start_time=" + myStart_time.value + "&stop_time=" + myStop_time.value + "&interval_hour=" + myInterval_hour.value + "&ps=" + myPs.value + "&result=" + myResult.value);
-		}
-		
-		function onDeleteClick(myMedicine_id){
-		var status;
-					if(confirm("您確定要刪除嗎?"))
-						status = true;
-					else
-						status = false;
-			if(status){
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} 
-			else    { // code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-						}
-					}
-					xmlhttp.open("POST", "medicine_delete.php", true);
-					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					xmlhttp.send("medicine_id=" + myMedicine_id);
-					}else{
-						
-					}
-		}
-		
-		function update_medicine_btn(){
-		
-			var myU_medicine_id = document.getElementById('u_medicine_id');
-			var myU_medicine_name = document.getElementById('u_medicine_name');
-			var myU_start_time = document.getElementById('u_start_time');
-			var myU_stop_time = document.getElementById('u_stop_time');
-			var myU_interval_hour = document.getElementById('u_interval_hour');
-			var myU_ps = document.getElementById('u_ps');
-			var myU_result = document.getElementById('u_result');
-			
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} 
-			else    { // code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-						}
-					}
-					xmlhttp.open("POST", "medicine_update_action.php", true);
-					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					xmlhttp.send("medicine_id=" + myU_medicine_id.value + "&medicine_name=" + myU_medicine_name.value + "&start_time=" + myU_start_time.value + "&stop_time=" + myU_stop_time.value + "&interval_hour=" + myU_interval_hour.value + "&ps=" + myU_ps.value + "&result=" + myU_result.value);
-		}
-		/*
-		function getAlarm(){
-			var myCheckbox = document.getElementById("u_flip-checkbox");
-			console.log(document.getElementById("u_flip-checkbox"));
-		};
-		*/
-		/*function onListClick(myListid){
-		var status;
-					if(confirm(myListid))
-						status = true;
-					else
-						status = false;
-			if(status){
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} 
-			else    { // code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-						}
-					}
-					//xmlhttp.open("POST", "medicine_delete.php", true);
-					//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					//xmlhttp.send("medicine_id=" + myMedicine_id);
-					}else{
-						
-					}
-		}*/
-		
-	</script>
-</head>
+        <!--Theme-->
+        <link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
+        <link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
+        <link rel="stylesheet" href="css/health.css">
 
-<body>
+        <script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
+        <script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
 
-	<div data-role="page" class="background">
-		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true"> 
-			<ul data-role="listview">
-				<li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
-		</ul>
-		</div>
-		<header data-role="header" data-position="fixed">
-			<a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
-			<h1>健康小精靈</h1>
-			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
-		</header>
-		
-		
-		<section>
-			<div class="container">
-				<div class="vaccine_context">
-					<div id="test"></div>
-					<img src="icon/smile.png"> 幫助您做好藥品管理!<br>
-				</div>
-				<a href="#myPopupDialog"  style="margin-left: 5px;" data-rel="popup" data-position-to="window" data-transition="fade" class="insert_health_record_btn ui-btn ui-corner-all ui-shadow ui-btn-inline">新增藥品紀錄</a>
-				<div id="txtHint"><b>Loading...</b></div>
-				
-				<div data-role="popup" id="myPopupDialog">
-					<div data-role="header">
-					  <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-delete ui-btn-icon-notext" data-rel="back"></a>
-					  <h4 class="modal-title">藥品紀錄</h4>
-					</div>
 
-						<div id="insertDialog" data-role="main" class="ui-content">
-							<div class="modal-body" data-role="main" class="ui-content">
-							<input type="hidden" name="people_id" id="people_id" value=1>  <!--< ? php echo $row['people_id'] ?>-->
-								<div class="form-group">
-									<label>藥品名稱:</label>
-									<input type="text" id="medicine_name" name="medicine_name">
-								</div>
-								<div class="form-group">
-									<label>每日幾次:</label>
-									<input type="number" id="interval_hour" name="interval_hour" min="1" max="24" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
-								</div>
-								<div class="form-group">
-									<label>用藥起始日:</label>
-									 <input type="date" id="start_time" name="start_time" data-role="datebox"/>
-								</div>
-								<div class="form-group">
-									<label>停藥日:</label>
-									 <input type="date" id="stop_time" name="stop_time" data-role="datebox"/>
-								</div>
-								<div class="form-group">
-									<label for="textarea">備註:</label>
-									<textarea cols="40" rows="8" name="ps" id="ps"></textarea>
-								</div>
-								<div class="form-group">
-									<label for="textarea">使用效果:</label>
-									<textarea cols="40" rows="8" name="result" id="result"></textarea>
-								</div>
-							</div>
-						</div>
-					<div data-role="footer">
-						<h1><button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="true" data-msgtext="loading..." data-rel="back" onclick="send_medicine_btn()">送出</button></h1>
-					</div>
-				</div>
-				
-			</div>		
-						<div data-role="popup" id="confirmDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
-							<div data-role="header" data-theme="a">
-							<h1>警告視窗</h1>
-							</div>
-							<div role="main" class="ui-content">
-								<h3 class="ui-title">您確定要刪除嗎?</p>
-								<a onclick="onDeleteClick(this.value)" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">刪除</a>
-								<a onclick="" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">取消</a>
-							</div>
-						</div>
-						
-						
-		</section>
+        <style>
+        </style>
 
-		<footer data-role="footer" data-position="fixed">
-			<nav data-role="navbar">
-				<ul>
-					<li><a rel="external" href="health_people.html"><img class="icon_img" src="icon/people.png"><br>健康紀錄</a></li>
-					<li><a rel="external" href="health_needle.html"><img class="icon_img" src="icon/needle.png"><br>疫苗紀錄</a></li>
-					<li><a rel="external" href="health_medicine.html" class="ui-btn-active ui-state-persist"><img class="icon_img" src="icon/medicine.png"><br>藥品紀錄</a></li>
-				</ul>
-			</nav>
-		</footer>
-		
-	</div>
-</body>
+        <script type="application/javascript">
+
+            $(function(){
+            showList();
+            });
+
+
+            $(document).on( "click", ".show-page-loading-msg", function() {
+            var $this = $( this ),
+            theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+            msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData( "textonly" );
+            html = $this.jqmData( "html" ) || "";
+            $.mobile.loading( 'show', {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+            });
+            fadeOut();
+
+            })
+            .on( "click", ".hide-page-loading-msg", function() {
+            $.mobile.loading( "hide" );
+            });
+
+            function fadeOut() {
+            setTimeout('$.mobile.loading( "hide" )', 1000);
+            }
+
+
+            function showList() {
+
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+            }
+            xmlhttp.open("GET", "medicine_list.php",  true);
+            xmlhttp.send();
+            }
+
+            function send_medicine_btn(){
+
+            $("#myPopupDialog-popup").fadeToggle();
+
+            var myMedicine_name = document.getElementById('medicine_name');
+            var myStart_time = document.getElementById('start_time');
+            var myStop_time = document.getElementById('stop_time');
+            var myInterval_hour = document.getElementById('interval_hour');
+            var myPs = document.getElementById('ps');
+            var myResult = document.getElementById('result');
+            console.log(myMedicine_name.value);
+            console.log(myStart_time.value);
+            console.log(myStop_time.value);
+            console.log(myInterval_hour.value);
+            console.log(myPs.value);
+            console.log(myResult.value);
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+            }
+            xmlhttp.open("POST", "medicine_insert.php", true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("&medicine_name=" + myMedicine_name.value + "&start_time=" + myStart_time.value + "&stop_time=" + myStop_time.value + "&interval_hour=" + myInterval_hour.value + "&ps=" + myPs.value + "&result=" + myResult.value);
+            }
+
+            function onDeleteClick(myMedicine_id){
+            var status;
+            if(confirm("您確定要刪除嗎?"))
+            status = true;
+            else
+            status = false;
+            if(status){
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+            }
+            xmlhttp.open("POST", "medicine_delete.php", true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("medicine_id=" + myMedicine_id);
+            }else{
+
+            }
+            }
+
+            function update_medicine_btn(){
+
+            var myU_medicine_id = document.getElementById('u_medicine_id');
+            var myU_medicine_name = document.getElementById('u_medicine_name');
+            var myU_start_time = document.getElementById('u_start_time');
+            var myU_stop_time = document.getElementById('u_stop_time');
+            var myU_interval_hour = document.getElementById('u_interval_hour');
+            var myU_ps = document.getElementById('u_ps');
+            var myU_result = document.getElementById('u_result');
+
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            }
+            }
+            xmlhttp.open("POST", "medicine_update_action.php", true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("medicine_id=" + myU_medicine_id.value + "&medicine_name=" + myU_medicine_name.value + "&start_time=" + myU_start_time.value + "&stop_time=" + myU_stop_time.value + "&interval_hour=" + myU_interval_hour.value + "&ps=" + myU_ps.value + "&result=" + myU_result.value);
+            }
+            /*
+            function getAlarm(){
+            var myCheckbox = document.getElementById("u_flip-checkbox");
+            console.log(document.getElementById("u_flip-checkbox"));
+            };
+            */
+            /*function onListClick(myListid){
+            var status;
+            if(confirm(myListid))
+            status = true;
+            else
+            status = false;
+            if(status){
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } 
+            else    { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+            }
+            //xmlhttp.open("POST", "medicine_delete.php", true);
+            //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            //xmlhttp.send("medicine_id=" + myMedicine_id);
+            }else{
+
+            }
+            }*/
+
+        </script>
+    </head>
+
+    <body>
+
+        <div data-role="page" class="background">
+            <div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true"> 
+                <ul data-role="listview">
+                    <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
+                </ul>
+            </div>
+            <header data-role="header" data-position="fixed">
+                <a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+                <h1>健康小精靈</h1>
+                <a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+            </header>
+
+
+            <section>
+                <div class="container">
+                    <div class="vaccine_context">
+                        <div id="test"></div>
+                        <img src="icon/smile.png"> 幫助您做好藥品管理!<br>
+                    </div>
+                    <a href="#myPopupDialog"  style="margin-left: 5px;" data-rel="popup" data-position-to="window" data-transition="fade" class="insert_health_record_btn ui-btn ui-corner-all ui-shadow ui-btn-inline">新增藥品紀錄</a>
+                    <div id="txtHint"><b>Loading...</b></div>
+
+                    <div data-role="popup" id="myPopupDialog">
+                        <div data-role="header">
+                            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-delete ui-btn-icon-notext" data-rel="back"></a>
+                            <h4 class="modal-title">藥品紀錄</h4>
+                        </div>
+
+                        <div id="insertDialog" data-role="main" class="ui-content">
+                            <div class="modal-body" data-role="main" class="ui-content">
+                                <input type="hidden" name="people_id" id="people_id" value=1>  <!--< ? php echo $row['people_id'] ?>-->
+                                <div class="form-group">
+                                    <label>藥品名稱:</label>
+                                    <input type="text" id="medicine_name" name="medicine_name">
+                                </div>
+                                <div class="form-group">
+                                    <label>每日幾次:</label>
+                                    <input type="number" id="interval_hour" name="interval_hour" min="1" max="24" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                                </div>
+                                <div class="form-group">
+                                    <label>用藥起始日:</label>
+                                    <input type="date" id="start_time" name="start_time" data-role="datebox"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>停藥日:</label>
+                                    <input type="date" id="stop_time" name="stop_time" data-role="datebox"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="textarea">備註:</label>
+                                    <textarea cols="40" rows="8" name="ps" id="ps"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="textarea">使用效果:</label>
+                                    <textarea cols="40" rows="8" name="result" id="result"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-role="footer">
+                            <h1><button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="true" data-msgtext="loading..." data-rel="back" onclick="send_medicine_btn()">送出</button></h1>
+                        </div>
+                    </div>
+
+                </div>		
+                <div data-role="popup" id="confirmDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+                    <div data-role="header" data-theme="a">
+                        <h1>警告視窗</h1>
+                    </div>
+                    <div role="main" class="ui-content">
+                        <h3 class="ui-title">您確定要刪除嗎?</p>
+                            <a onclick="onDeleteClick(this.value)" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">刪除</a>
+                            <a onclick="" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">取消</a>
+                    </div>
+                </div>
+
+
+            </section>
+
+            <footer data-role="footer" data-position="fixed">
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a rel="external" href="health_people.html"><img class="icon_img" src="icon/people.png"><br>健康紀錄</a></li>
+                        <li><a rel="external" href="health_needle.html"><img class="icon_img" src="icon/needle.png"><br>疫苗紀錄</a></li>
+                        <li><a rel="external" href="health_medicine.html" class="ui-btn-active ui-state-persist"><img class="icon_img" src="icon/medicine.png"><br>藥品紀錄</a></li>
+                    </ul>
+                </nav>
+            </footer>
+
+        </div>
+    </body>
 
 </html>

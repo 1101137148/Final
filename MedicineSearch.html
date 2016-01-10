@@ -1,216 +1,217 @@
 <!DOCTYPE html>
 <html lang="zh">
 
-<head>
-    <meta charset="utf-8">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
-    <link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
-    <link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
-    <!--<link rel="stylesheet" href="css/mystyle.css">-->
-    <!--<script src="js/*.js">-->
-    <!--<link rel="stylesheet" href="css/main.css">-->
-    <!--Theme-->
-    <link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
-    <link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
-    <script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
-    <script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
-	<link rel="stylesheet" href="css/template.css" />
-    <script>
-    var each_page_row_count = 100;
-    var msgArray;
-    var pages;
+    <head>
+        <meta charset="utf-8">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <!--<link rel="stylesheet" media="(max-width: 420px)" href="css/iphone.css">
+        <link rel="stylesheet" media="(min-width: 421px) and (max-width: 1024px)" href="css/ipad.css">
+        <link rel="stylesheet" media="(min-width: 1025px)" href="css/mac.css">
+        <!--<link rel="stylesheet" href="css/mystyle.css">-->
+        <!--<script src="js/*.js">-->
+        <!--<link rel="stylesheet" href="css/main.css">-->
+        <!--Theme-->
+        <link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
+        <link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
+        <script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
+        <script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
+        <link rel="stylesheet" href="css/template.css" />
+        <script>
+            var each_page_row_count = 100;
+            var msgArray;
+            var pages;
 
 
 
-    function Search() {
-        var searchValue = $('#MedicineSearch').val();
-        $('#Search_Medicine').html('');
-        /*$('#SearchWarn').hide();*/
-        var $loading = $('#loadingDiv').hide();
-        $(document)
-            .ajaxStart(function() {
-                $loading.show();
-            })
-            .ajaxStop(function() {
-                $loading.hide();
-            });
-        if (searchValue == "") {
-            
-            $('#popupDialog').popup('open');
-        } else {
-        	msgArray = [];
-        	$("#pages_div").empty();
-            $.ajax({
-				type:'POST',
-                url: "medicine.php",          
-                //crossDomain: true,
-				//dataType: "json",
-				data:{ 'searchValue' : searchValue},
-                success: function(data) {
-				// 9中文品名 11適應症 16主成分略述
-				/*
-				for( var i = 0 ; i<data.length;i++){
-				  
-				    var str = data[i][11].適應症;
-					var num =str.search(searchValue);
-					if((data[i][9].中文品名)==(searchValue)){
-					var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
-							msg+="<h3>中文品名:" + data[i][9].中文品名 + "</h3><p><h4>適應症 : " + data[i][11].適應症;
-						 
-							msg += "<br>主成分略述 : " + data[i][16].主成分略述 + "</h4></p>";
-						
-						msg += "</div>";
-						msgArray.push(msg);
-					
-						
-						
-					}else if (num !=-1){
-						var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
-					 
-						
-							msg+="<h3>中文品名:" + data[i][9].中文品名 + "</h3><p><h4>適應症 : " + data[i][11].適應症;
-						
-							msg += "<br>主成分略述 : " + data[i][16].主成分略述 + "</h4></p>";
-						
-						msg += "</div>";
-						msgArray.push(msg);
-						
-					}
-					
-					
-				}*/
-				
-				 
-					
-				
-               /*   $.each(data, function(i, item) {
-                        $.each(item, function(j, item2) {
-                            if ((item2.中文品名 && (item2.中文品名).includes(searchValue))) {
-                                var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
-                                $.each(data[i], function(k, item3) {
-                                    if (item3.中文品名) {
-									
-                                        msg += "<h3>中文品名:" + item3.中文品名 + "</h3><p><h4>適應症 : " + item2.適應症;
-                                    } else if (item3.主成分略述) {
-                                        msg += "<br>主成分略述 : " + item3.主成分略述 + "</h4></p>"
-                                    }
-                                });
-                                msg += "</div>";
-                                msgArray.push(msg);
-
-                            } else if ((item2.適應症 && (item2.適應症).includes(searchValue))) {
-                                var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
-                                $.each(data[i], function(k, item3) {
-                                    if (item3.中文品名) {
-									console.log(item3.中文品名);
-                                        msg += "<h3>中文品名:" + item3.中文品名 + "</h3><p><h4>適應症 : " + item2.適應症;
-                                    } else if (item3.主成分略述) {
-                                        msg += "<br>主成分略述 : " + item3.主成分略述 + "</h4></p>"
-                                    }
-                                });
-                                msg += "</div>";
-                                msgArray.push(msg);
-
-                            }
+            function Search() {
+                var searchValue = $('#MedicineSearch').val();
+                $('#Search_Medicine').html('');
+                /*$('#SearchWarn').hide();*/
+                var $loading = $('#loadingDiv').hide();
+                $(document)
+                        .ajaxStart(function () {
+                            $loading.show();
+                        })
+                        .ajaxStop(function () {
+                            $loading.hide();
                         });
-                    }); */
-					msgArray = $.parseJSON(data);;
-					if(msgArray.length != 0){
-						pages = Math.ceil(msgArray.length / each_page_row_count);
+                if (searchValue == "") {
 
-						var msg = '<div data-role="controlgroup" data-type="horizontal">';
+                    $('#popupDialog').popup('open');
+                } else {
+                    msgArray = [];
+                    $("#pages_div").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: "medicine.php",
+                        //crossDomain: true,
+                        //dataType: "json",
+                        data: {'searchValue': searchValue},
+                        success: function (data) {
+                            // 9中文品名 11適應症 16主成分略述
+                            /*
+                             for( var i = 0 ; i<data.length;i++){
+                             
+                             var str = data[i][11].適應症;
+                             var num =str.search(searchValue);
+                             if((data[i][9].中文品名)==(searchValue)){
+                             var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
+                             msg+="<h3>中文品名:" + data[i][9].中文品名 + "</h3><p><h4>適應症 : " + data[i][11].適應症;
+                             
+                             msg += "<br>主成分略述 : " + data[i][16].主成分略述 + "</h4></p>";
+                             
+                             msg += "</div>";
+                             msgArray.push(msg);
+                             
+                             
+                             
+                             }else if (num !=-1){
+                             var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
+                             
+                             
+                             msg+="<h3>中文品名:" + data[i][9].中文品名 + "</h3><p><h4>適應症 : " + data[i][11].適應症;
+                             
+                             msg += "<br>主成分略述 : " + data[i][16].主成分略述 + "</h4></p>";
+                             
+                             msg += "</div>";
+                             msgArray.push(msg);
+                             
+                             }
+                             
+                             
+                             }*/
 
-						for (var i = 0; i < pages; i++) {
-							msg += "<a class='ui-btn' onclick=\"searchDataFromPageNum(" + (i + 1) + ")\">" + (i + 1) + "</a>";
-
-						}
-						msg += '</div>';
-						
-						$('#pages_div').append(msg).trigger("create");
-						searchDataFromPageNum(1);
-					}
 
 
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-					console.log(xhr.status);
-					console.log(thrownError);
-				}
-            });
-        }
-    }
 
-    function searchDataFromPageNum(pageNum) {
-        var msg = "";
-        if (pageNum == pages) { // 如果按了最後一頁
-            for (var i = (pageNum - 1) * each_page_row_count; i < msgArray.length; i++) {
-                msg += msgArray[i];
+                            /*   $.each(data, function(i, item) {
+                             $.each(item, function(j, item2) {
+                             if ((item2.中文品名 && (item2.中文品名).includes(searchValue))) {
+                             var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
+                             $.each(data[i], function(k, item3) {
+                             if (item3.中文品名) {
+                             
+                             msg += "<h3>中文品名:" + item3.中文品名 + "</h3><p><h4>適應症 : " + item2.適應症;
+                             } else if (item3.主成分略述) {
+                             msg += "<br>主成分略述 : " + item3.主成分略述 + "</h4></p>"
+                             }
+                             });
+                             msg += "</div>";
+                             msgArray.push(msg);
+                             
+                             } else if ((item2.適應症 && (item2.適應症).includes(searchValue))) {
+                             var msg = "<div data-role='collapsible' data-collapsed='true' data-content-theme='b' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' class='ui-collapsible ui-collapsible-inset'>";
+                             $.each(data[i], function(k, item3) {
+                             if (item3.中文品名) {
+                             console.log(item3.中文品名);
+                             msg += "<h3>中文品名:" + item3.中文品名 + "</h3><p><h4>適應症 : " + item2.適應症;
+                             } else if (item3.主成分略述) {
+                             msg += "<br>主成分略述 : " + item3.主成分略述 + "</h4></p>"
+                             }
+                             });
+                             msg += "</div>";
+                             msgArray.push(msg);
+                             
+                             }
+                             });
+                             }); */
+                            msgArray = $.parseJSON(data);
+                            ;
+                            if (msgArray.length != 0) {
+                                pages = Math.ceil(msgArray.length / each_page_row_count);
+
+                                var msg = '<div data-role="controlgroup" data-type="horizontal">';
+
+                                for (var i = 0; i < pages; i++) {
+                                    msg += "<a class='ui-btn' onclick=\"searchDataFromPageNum(" + (i + 1) + ")\">" + (i + 1) + "</a>";
+
+                                }
+                                msg += '</div>';
+
+                                $('#pages_div').append(msg).trigger("create");
+                                searchDataFromPageNum(1);
+                            }
+
+
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(xhr.status);
+                            console.log(thrownError);
+                        }
+                    });
+                }
             }
-        } else {
-            for (var i = (pageNum - 1) * each_page_row_count; i < each_page_row_count * pageNum; i++) {
-                msg += msgArray[i];
+
+            function searchDataFromPageNum(pageNum) {
+                var msg = "";
+                if (pageNum == pages) { // 如果按了最後一頁
+                    for (var i = (pageNum - 1) * each_page_row_count; i < msgArray.length; i++) {
+                        msg += msgArray[i];
+                    }
+                } else {
+                    for (var i = (pageNum - 1) * each_page_row_count; i < each_page_row_count * pageNum; i++) {
+                        msg += msgArray[i];
+                    }
+                }
+                $("#Search_Medicine").empty();
+                $('#Search_Medicine').append(msg).trigger("create");
             }
-        }
-        $("#Search_Medicine").empty();
-        $('#Search_Medicine').append(msg).trigger("create");
-    }
 
 
-    function hot_categories_search(keyword){
-    	$('#MedicineSearch').val(keyword);
-    	Search();
-    }
-    </script>
-</head>
+            function hot_categories_search(keyword) {
+                $('#MedicineSearch').val(keyword);
+                Search();
+            }
+        </script>
+    </head>
 
-<body>
-    <div data-role="page" class="background">
-        <div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true">
-		<ul data-role="listview">
-				<li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
-		</ul>
-        </div>
-        <header data-role="header" data-position="fixed">
-            <a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
-            <h1>找藥品</h1>
-            <a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
-        </header>
-        <div data-role="fieldcontain">
-            <input type="search" name="MedicineSearch" id="MedicineSearch" data-inline="true" placeholder="請輸入藥品名稱或症狀" />
-            <div class="hot_categories">
-            	熱門關鍵字:
-            	<a onclick="hot_categories_search(this.innerHTML)">胃痛</a>
-            	<a onclick="hot_categories_search(this.innerHTML)">感冒</a>
-            	<a onclick="hot_categories_search(this.innerHTML)">頭痛</a>
-            	<a onclick="hot_categories_search(this.innerHTML)">發燒</a>
-            	<a onclick="hot_categories_search(this.innerHTML)">咳嗽</a>
-            	<a onclick="hot_categories_search(this.innerHTML)">流鼻水</a>
+    <body>
+        <div data-role="page" class="background">
+            <div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true">
+                <ul data-role="listview">
+                    <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
+                </ul>
             </div>
-            <input type="button" value="search" data-inline="true" onclick="Search()" />
-        </div>
-        <div id="loadingDiv">
-            <img src="9.gif" />資料載入中，請稍候...
-        </div>
-        <div data-role="main" class="ui-content">
-            <div data-role="collapsibleset" id="Search_Medicine" data-inset="true"></div>
-            <div class="ui-controlgroup-controls" id="pages_div">
+            <header data-role="header" data-position="fixed">
+                <a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+                <h1>找藥品</h1>
+                <a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+            </header>
+            <div data-role="fieldcontain">
+                <input type="search" name="MedicineSearch" id="MedicineSearch" data-inline="true" placeholder="請輸入藥品名稱或症狀" />
+                <div class="hot_categories">
+                    熱門關鍵字:
+                    <a onclick="hot_categories_search(this.innerHTML)">胃痛</a>
+                    <a onclick="hot_categories_search(this.innerHTML)">感冒</a>
+                    <a onclick="hot_categories_search(this.innerHTML)">頭痛</a>
+                    <a onclick="hot_categories_search(this.innerHTML)">發燒</a>
+                    <a onclick="hot_categories_search(this.innerHTML)">咳嗽</a>
+                    <a onclick="hot_categories_search(this.innerHTML)">流鼻水</a>
+                </div>
+                <input type="button" value="search" data-inline="true" onclick="Search()" />
+            </div>
+            <div id="loadingDiv">
+                <img src="9.gif" />資料載入中，請稍候...
+            </div>
+            <div data-role="main" class="ui-content">
+                <div data-role="collapsibleset" id="Search_Medicine" data-inset="true"></div>
+                <div class="ui-controlgroup-controls" id="pages_div">
+                </div>
+            </div>
+            <footer data-role="footer" data-position="fixed" style="height:5%;">
+            </footer>
+            <div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="width:230px;" class="ui-corner-all ui-popup ui-body-c ui-overlay-shadow" aria-disabled="false" data-disabled="false" data-shadow="true" data-corners="true" data-transition="none" data-position-to="origin">
+                <div data-role="header" data-theme="a" class="ui-corner-top ui-header ui-bar-a" role="banner">
+                    <h1 class="ui-title" role="heading" aria-level="1">提醒</h1>
+                </div>
+                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content ui-body-d" role="main">
+                    <h2 class="ui-title">請輸入藥品名稱或症狀!</h2>
+                    <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">確定</span></span></a>
+                </div>
             </div>
         </div>
-        <footer data-role="footer" data-position="fixed" style="height:5%;">
-        </footer>
-        <div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="width:230px;" class="ui-corner-all ui-popup ui-body-c ui-overlay-shadow" aria-disabled="false" data-disabled="false" data-shadow="true" data-corners="true" data-transition="none" data-position-to="origin">
-            <div data-role="header" data-theme="a" class="ui-corner-top ui-header ui-bar-a" role="banner">
-                <h1 class="ui-title" role="heading" aria-level="1">提醒</h1>
-            </div>
-            <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content ui-body-d" role="main">
-                <h2 class="ui-title">請輸入藥品名稱或症狀!</h2>
-                <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">確定</span></span></a>
-            </div>
-        </div>
-    </div>
-</body>
+    </body>
 
 </html>

@@ -1,360 +1,354 @@
 <!doctype html>
 <html lang="zh">
 
-<head>
-	<meta charset="utf-8">
-	<title>Page Title</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	
-	<!--Theme-->
-	<link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
-	<link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
-	
-	<link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
-	
-	<script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
-	<script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <!--Theme-->
+        <link rel="stylesheet" href="jqueryMobile/myTheme/myThemeStyle.min.css" />
+        <link rel="stylesheet" href="jqueryMobile/myTheme/jquery.mobile.icons.min.css" />
+
+        <link rel="stylesheet" href="jqueryMobile/jquery.mobile.structure-1.4.5.min.css" />
+
+        <script src="jqueryMobile/jquery/jquery-1.11.3.min.js"></script>
+        <script src="jqueryMobile/jquery.mobile-1.4.5.min.js"></script>
 
 
-	<link rel="stylesheet" href="css/health.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	
+        <link rel="stylesheet" href="css/health.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-	<style>
 
-	
-	</style>
+        <style>
 
-	<script type="text/javascript">	
-	/*
-	$(document).on( "click", ".show-page-loading-msg", function() {
-	  var $this = $( this ),
-	  theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
-	  msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
-	  textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
-	  textonly = !!$this.jqmData( "textonly" );
-	  html = $this.jqmData( "html" ) || "";
-	$.mobile.loading( 'show', {
-	  text: msgText,
-	  textVisible: textVisible,
-	  theme: theme,
-	  textonly: textonly,
-	  html: html
-	  });
-	})
-	.on( "click", ".hide-page-loading-msg", function() {
-	  $.mobile.loading( "hide" );
-	});
-	*/
-	
-	$(function(){
-		health_people_show();
-		health_dailyrecord_show();		
-	});
-	
-	function health_people_show() {
-		var xmlhttp;
-        if (window.XMLHttpRequest) {
+
+        </style>
+
+        <script type="text/javascript">
+            /*
+             $(document).on( "click", ".show-page-loading-msg", function() {
+             var $this = $( this ),
+             theme = $this.jqmData( "theme" ) || $.mobile.loader.prototype.options.theme,
+             msgText = $this.jqmData( "msgtext" ) || $.mobile.loader.prototype.options.text,
+             textVisible = $this.jqmData( "textvisible" ) || $.mobile.loader.prototype.options.textVisible,
+             textonly = !!$this.jqmData( "textonly" );
+             html = $this.jqmData( "html" ) || "";
+             $.mobile.loading( 'show', {
+             text: msgText,
+             textVisible: textVisible,
+             theme: theme,
+             textonly: textonly,
+             html: html
+             });
+             })
+             .on( "click", ".hide-page-loading-msg", function() {
+             $.mobile.loading( "hide" );
+             });
+             */
+
+            $(function () {
+                health_people_show();
+                health_dailyrecord_show();
+            });
+
+            function health_people_show() {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
                     // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
+                } else { // code for IE6, IE5
                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                
-                xmlhttp.onreadystatechange = function() {
+
+                xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         document.getElementById("show_people_data").innerHTML = xmlhttp.responseText;
                     }
                 }
-                xmlhttp.open("GET", "health_people_show.php",  true);
+                xmlhttp.open("GET", "health_people_show.php", true);
                 xmlhttp.send();
-	}
-	
-	function health_dailyrecord_show() {
-		var xmlhttp1;
-        if (window.XMLHttpRequest) {
+            }
+
+            function health_dailyrecord_show() {
+                var xmlhttp1;
+                if (window.XMLHttpRequest) {
                     // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp1 = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
+                } else { // code for IE6, IE5
                     xmlhttp1 = new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                
-                xmlhttp1.onreadystatechange = function() {
+
+                xmlhttp1.onreadystatechange = function () {
                     if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
                         document.getElementById("show_dailyrecord_data").innerHTML = xmlhttp1.responseText;
                     }
                 }
-                xmlhttp1.open("GET", "health_dailyrecord_show.php",  true);
+                xmlhttp1.open("GET", "health_dailyrecord_show.php", true);
                 xmlhttp1.send();
-	}
-	
-	function insert_health_record_btn(str) {
-		//on off
-		$("#myPopupDialog-popup").fadeToggle();
-		//health_dailyrecord_show();
-		var myPeople_id = document.getElementById('people_id');
-		var myToday_date = document.getElementById('today_date');
-        var myHeight = document.getElementById('height');
-		var myWeight = document.getElementById('weight');
-        var myS_pressure = document.getElementById('s_pressure');    
-		var myD_pressure = document.getElementById('d_pressure');
-        var myF_bloodglucose = document.getElementById('f_bloodglucose');    
-		var myL_bloodglucose = document.getElementById('l_bloodglucose');
-	
-		var xmlhttp;
-        if (window.XMLHttpRequest) {
+            }
+
+            function insert_health_record_btn(str) {
+                //on off
+                $("#myPopupDialog-popup").fadeToggle();
+                //health_dailyrecord_show();
+                var myPeople_id = document.getElementById('people_id');
+                var myToday_date = document.getElementById('today_date');
+                var myHeight = document.getElementById('height');
+                var myWeight = document.getElementById('weight');
+                var myS_pressure = document.getElementById('s_pressure');
+                var myD_pressure = document.getElementById('d_pressure');
+                var myF_bloodglucose = document.getElementById('f_bloodglucose');
+                var myL_bloodglucose = document.getElementById('l_bloodglucose');
+
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
                     // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
+                } else { // code for IE6, IE5
                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                
-                xmlhttp.onreadystatechange = function() {
+
+                xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         document.getElementById("show_dailyrecord_data").innerHTML = xmlhttp.responseText;
                     }
                 }
                 xmlhttp.open("POST", "health_people_insert.php", true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send("today_date=" + myToday_date.value + "&height=" + myHeight.value + "&weight=" + myWeight.value + "&s_pressure=" + myS_pressure.value + "&d_pressure=" + myD_pressure.value + "&f_bloodglucose=" + myF_bloodglucose.value + "&l_bloodglucose=" + myL_bloodglucose.value + "&people_id=" + myPeople_id.value);
-				//http://localhost/app/APP/health_people_insert.php?today_date=2015-03-03&height=130&weight=30&s_pressure=100&d_pressure=80&f_bloodglucose=80&l_bloodglucose=100&people_id=1
-			
-	}
-	
-	function delete_health_record(myDaily_record_id_d){
-	var status;
-                if(confirm("確定要刪除嗎?"))
-					status = true;
-				else
-					status = false;
-		if(status){
-		var xmlhttp;
-        if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                
-                xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        document.getElementById("show_dailyrecord_data").innerHTML = xmlhttp.responseText;
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.send("today_date=" + myToday_date.value + "&height=" + myHeight.value + "&weight=" + myWeight.value + "&s_pressure=" + myS_pressure.value + "&d_pressure=" + myD_pressure.value + "&f_bloodglucose=" + myF_bloodglucose.value + "&l_bloodglucose=" + myL_bloodglucose.value + "&people_id=" + myPeople_id.value);
+                //http://localhost/app/APP/health_people_insert.php?today_date=2015-03-03&height=130&weight=30&s_pressure=100&d_pressure=80&f_bloodglucose=80&l_bloodglucose=100&people_id=1
+
+            }
+
+            function delete_health_record(myDaily_record_id_d) {
+                var status;
+                if (confirm("確定要刪除嗎?"))
+                    status = true;
+                else
+                    status = false;
+                if (status) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    } else { // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                     }
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById("show_dailyrecord_data").innerHTML = xmlhttp.responseText;
+                        }
+                    }
+                    xmlhttp.open("POST", "health_people_delete.php", true);
+                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xmlhttp.send("daily_record_id_d=" + myDaily_record_id_d);
+                } else {
+
                 }
-                xmlhttp.open("POST", "health_people_delete.php", true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send("daily_record_id_d=" + myDaily_record_id_d);
-			}else{
-				
-			}
-    }
-	
-	function update_health_record_dialog(myDaily_record_id_u){
-		var xmlhttp;
-        if (window.XMLHttpRequest) {
+            }
+
+            function update_health_record_dialog(myDaily_record_id_u) {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
                     // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
+                } else { // code for IE6, IE5
                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                
-                xmlhttp.onreadystatechange = function() {
+
+                xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         document.getElementById("show_update_window").innerHTML = xmlhttp.responseText;
                     }
                 }
                 xmlhttp.open("POST", "health_people_update.php", true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send("daily_record_id_u=" + myDaily_record_id_u);
-	}
-	
-	function update_health_record(){	
-		$("#updateDialog-popup").fadeToggle();
-		var myDaily_record_id_u = document.getElementById('daily_record_id_u');
-		var myToday_date = document.getElementById('u_today_date');
-        var myHeight = document.getElementById('u_height');
-		var myWeight = document.getElementById('u_weight');
-        var myS_pressure = document.getElementById('u_s_pressure');    
-		var myD_pressure = document.getElementById('u_d_pressure');
-        var myF_bloodglucose = document.getElementById('u_f_bloodglucose');    
-		var myL_bloodglucose = document.getElementById('u_l_bloodglucose');
-		var myPeople_id = document.getElementById('people_id');
-		
-		var xmlhttp;
-        if (window.XMLHttpRequest) {
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.send("daily_record_id_u=" + myDaily_record_id_u);
+            }
+
+            function update_health_record() {
+                $("#updateDialog-popup").fadeToggle();
+                var myDaily_record_id_u = document.getElementById('daily_record_id_u');
+                var myToday_date = document.getElementById('u_today_date');
+                var myHeight = document.getElementById('u_height');
+                var myWeight = document.getElementById('u_weight');
+                var myS_pressure = document.getElementById('u_s_pressure');
+                var myD_pressure = document.getElementById('u_d_pressure');
+                var myF_bloodglucose = document.getElementById('u_f_bloodglucose');
+                var myL_bloodglucose = document.getElementById('u_l_bloodglucose');
+                var myPeople_id = document.getElementById('people_id');
+
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
                     // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp = new XMLHttpRequest();
-                } 
-        else    { // code for IE6, IE5
+                } else { // code for IE6, IE5
                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                
-                xmlhttp.onreadystatechange = function() {
+
+                xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         document.getElementById("show_dailyrecord_data").innerHTML = xmlhttp.responseText;
                     }
                 }
                 xmlhttp.open("POST", "health_people_update_action.php", true);
-                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send("daily_record_id_u=" + myDaily_record_id_u.value + "&today_date=" + myToday_date.value + "&height=" + myHeight.value + "&weight=" + myWeight.value + "&s_pressure=" + myS_pressure.value + "&d_pressure=" + myD_pressure.value + "&f_bloodglucose=" + myF_bloodglucose.value + "&l_bloodglucose=" + myL_bloodglucose.value + "&people_id=" + myPeople_id.value);
-	}
-	</script>
-	
-</head>
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.send("daily_record_id_u=" + myDaily_record_id_u.value + "&today_date=" + myToday_date.value + "&height=" + myHeight.value + "&weight=" + myWeight.value + "&s_pressure=" + myS_pressure.value + "&d_pressure=" + myD_pressure.value + "&f_bloodglucose=" + myF_bloodglucose.value + "&l_bloodglucose=" + myL_bloodglucose.value + "&people_id=" + myPeople_id.value);
+            }
+        </script>
 
-<body>
+    </head>
 
-
-<div data-role="page" class="background">
-
-<div id="show_update_window"></div>
-		<div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true"> 
-		<ul data-role="listview">
-				<li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
-		</ul>
-		</div>
-		<header data-role="header" data-position="fixed" style="font-size: inherit;">
-			<a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
-			<h1>健康小精靈</h1>
-			<a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
-		</header>
-	<section data-role="page main" class="ui-content">
-		<div class="container">
-		    <div class="people">     
+    <body>
 
 
-					<a href="#myPopupDialog" data-rel="popup" data-position-to="window" data-transition="fade" class="insert_health_record_btn ui-btn ui-corner-all ui-shadow ui-btn-inline">新增健康紀錄</a>
+        <div data-role="page" class="background">
 
-				
-			
-			<div data-role="popup" id="myPopupDialog">
-					<div data-role="header">
-					  <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-delete ui-btn-icon-notext" data-rel="back"></a>
-					  <h4 class="modal-title">新增健康紀錄</h4>
-					</div>
+            <div id="show_update_window"></div>
+            <div data-role="panel" id="revealPanel" data-display="push" data-position="right" data-position-fixed="true"> 
+                <ul data-role="listview">
+                    <li data-icon="home"><a href="index.html" data-rel="close">首頁</a></li>	
+                </ul>
+            </div>
+            <header data-role="header" data-position="fixed" style="font-size: inherit;">
+                <a data-rel="back" rel="external" data-transition="slide"  class="ui-btn ui-corner-all ui-shadow ui-icon-carat-l ui-btn-icon-left">返回</a>
+                <h1>健康小精靈</h1>
+                <a href="#revealPanel" class="ui-btn ui-corner-all ui-shadow ui-icon-bullets ui-btn-icon-left">更多</a>
+            </header>
+            <section data-role="page main" class="ui-content">
+                <div class="container">
+                    <div class="people">     
 
-						<div id="insertDialog" data-role="main" class="ui-content">
-							<div class="modal-body" data-role="main" class="ui-content">
-							<input type="hidden" name="people_id" id="people_id" value=1>  <!--< ? php echo $row['people_id'] ?>-->
-								<div class="form-group">
-									<label>日期:</label>
-									<input type="date" name="today_date" id="today_date">
-								</div>
-								<div class="form-group">
-									<label>身高:</label>
-									<input type="text" name="height" id="height">
-								</div>
-								<div class="form-group">
-									<label>體重:</label>
-									<input type="text" name="weight" id="weight">
-								</div>
-								<div class="form-group">
-									<label>收縮壓:</label>
-									<input type="text" name="s_pressure" id="s_pressure">
-								</div>
-								<div class="form-group">
-									<label>舒張壓:</label>
-									<input type="text" name="d_pressure" id="d_pressure">
-								</div>
-								<div class="form-group">
-									<label>飯前血糖:</label>
-									<input type="text" name="f_bloodglucose" id="f_bloodglucose">
-								</div>
-								<div class="form-group">
-									<label>飯後血糖:</label>
-									<input type="text" name="l_bloodglucose" id="l_bloodglucose">
-								</div>
-							</div>
-						</div>
-					<div data-role="footer">
-						<h1><button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="true" data-msgtext="loading..." data-rel="back" onclick="insert_health_record_btn()">送出</button></h1>
-					</div>
-			</div>
-				
-				<br>
-				<div>
-					<div data-role="main" class="ui-content" style="width: 86%;">
-						<div data-role="collapsibleset" style="width: 100%;">
-						  <div data-role="collapsible">
-							<h3>BMI標準</h3>
-							<p>
-								<ul>
-									<li>體重過輕:BMI＜18.5</li>
-									<li><b>正常範圍:18.5≦BMI＜24</b></li>
-									<li>過重:24≦BMI＜27</li>
-									<li>輕度肥胖:27≦BMI＜30</li>
-									<li>中度肥胖:30≦BMI＜35</li>
-									<li>重度肥胖:BMI≧35</li>
-								</ul>
-							</p>
-						  </div>
-						  <div data-role="collapsible">
-							<h3>血壓標準</h3>
-							<p>
-								<ul>
-									<li><b>正常血壓:<130 & <85</b></li>
-									<li>高血壓第一期:140~159 or 90~99</li>
-									<li>高血壓第二期:160~179 or 100~109</li>
-									<li>高血壓第三期:≧180 or ≧110</li>
-								</ul>
-							</p>
-						  </div>
-						  <div data-role="collapsible">
-							<h3>血糖標準</h3>
-							<p>
-								<dl>
-									<dt>空腹血糖</dt>
-									<ul>
-										<li><b>正常空腹血糖值:70~100 mg/dl.</b></li>
-										<li>糖尿病前期:101~125 mg/dl.</li>
-										<li>糖尿病:≧126 mg/dl.</li>
-									</ul>
-								</dl>
-								<dl>
-									<dt>飯後血糖</dt>
-									<ul>
-										<li><b>正常飯後2小時血糖值:<140 mg/dl.</b></li>
-										<li>糖尿病前期:140~199 mg/dl.</li>
-										<li>糖尿病:≧200 mg/dl.</li>
-									</ul>
-								</dl>
-							</p>
-						  </div>
-						</div>
-					</div>
-					<font color = red style="font-size: 15px;"><b>　＊紅字代表不在正常範圍值，要多加注意！</b></font><br>
-				</div>
-				<div class="div_table">
-					<div class="CSSTableGenerator scrollit"><br>
-						<div id="show_dailyrecord_data"></div>
-					</div>            
-				</div>
-				<div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="myTable-popup-popup"><div class="ui-table-columntoggle-popup ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" id="myTable-popup"><fieldset class="ui-controlgroup ui-controlgroup-vertical ui-corner-all"><div class="ui-controlgroup-controls "><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-first-child ui-checkbox-off">CustomerID</label><input type="checkbox" checked="" data-cacheval="true"></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-on">ContactName</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-on">Address</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-on">City</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-off">PostalCode</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-last-child ui-checkbox-off">Country</label><input type="checkbox" checked=""></div></div></fieldset></div></div>
-				<br>
-			</div>	
-		</div>
-		
-				
-	</section>
-	<footer data-role="footer" data-position="fixed">
-			<nav data-role="navbar">
-				<ul>
-					<li><a rel="external"  href="health_people.html" class="ui-btn-active ui-state-persist"><img class="icon_img" src="icon/people.png"><br>健康紀錄</a></li>
-					<li><a rel="external" href="health_needle.html"><img class="icon_img" src="icon/needle.png"><br>疫苗紀錄</a></li>
-					<li><a rel="external"  href="health_medicine.html"><img class="icon_img" src="icon/medicine.png"><br>藥品紀錄</a></li>
-				</ul>
-			</nav>
-				<!--<div class="div_icon" onclick="window.location='health_people.php'"><img src="icon/people.png"></div>
-				<div class="div_icon" onclick="window.location='health_needle.html'"><img src="icon/needle.png"></div>
-				<div class="div_icon" onclick="window.location='health_medicine.html'"><img src="icon/medicine.png"></div>
-				<div class="div_icon" onclick="window.location='health_diet.html'"><img src="icon/diet.png"></div>-->
-	</footer>
-</div>
-</body>
+
+                        <a href="#myPopupDialog" data-rel="popup" data-position-to="window" data-transition="fade" class="insert_health_record_btn ui-btn ui-corner-all ui-shadow ui-btn-inline">新增健康紀錄</a>
+
+
+
+                        <div data-role="popup" id="myPopupDialog">
+                            <div data-role="header">
+                                <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-delete ui-btn-icon-notext" data-rel="back"></a>
+                                <h4 class="modal-title">新增健康紀錄</h4>
+                            </div>
+
+                            <div id="insertDialog" data-role="main" class="ui-content">
+                                <div class="modal-body" data-role="main" class="ui-content">
+                                    <input type="hidden" name="people_id" id="people_id" value=1>  <!--< ? php echo $row['people_id'] ?>-->
+                                    <div class="form-group">
+                                        <label>日期:</label>
+                                        <input type="date" name="today_date" id="today_date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>身高:</label>
+                                        <input type="text" name="height" id="height">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>體重:</label>
+                                        <input type="text" name="weight" id="weight">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>收縮壓:</label>
+                                        <input type="text" name="s_pressure" id="s_pressure">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>舒張壓:</label>
+                                        <input type="text" name="d_pressure" id="d_pressure">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>飯前血糖:</label>
+                                        <input type="text" name="f_bloodglucose" id="f_bloodglucose">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>飯後血糖:</label>
+                                        <input type="text" name="l_bloodglucose" id="l_bloodglucose">
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-role="footer">
+                                <h1><button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="true" data-msgtext="loading..." data-rel="back" onclick="insert_health_record_btn()">送出</button></h1>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div>
+                            <div data-role="main" class="ui-content" style="width: 86%;">
+                                <div data-role="collapsibleset" style="width: 100%;">
+                                    <div data-role="collapsible">
+                                        <h3>BMI標準</h3>
+                                        <p>
+                                        <ul>
+                                            <li>體重過輕:BMI＜18.5</li>
+                                            <li><b>正常範圍:18.5≦BMI＜24</b></li>
+                                            <li>過重:24≦BMI＜27</li>
+                                            <li>輕度肥胖:27≦BMI＜30</li>
+                                            <li>中度肥胖:30≦BMI＜35</li>
+                                            <li>重度肥胖:BMI≧35</li>
+                                        </ul>
+                                        </p>
+                                    </div>
+                                    <div data-role="collapsible">
+                                        <h3>血壓標準</h3>
+                                        <p>
+                                        <ul>
+                                            <li><b>正常血壓:<130 & <85</b></li>
+                                            <li>高血壓第一期:140~159 or 90~99</li>
+                                            <li>高血壓第二期:160~179 or 100~109</li>
+                                            <li>高血壓第三期:≧180 or ≧110</li>
+                                        </ul>
+                                        </p>
+                                    </div>
+                                    <div data-role="collapsible">
+                                        <h3>血糖標準</h3>
+                                        <p>
+                                        <dl>
+                                            <dt>空腹血糖</dt>
+                                            <ul>
+                                                <li><b>正常空腹血糖值:70~100 mg/dl.</b></li>
+                                                <li>糖尿病前期:101~125 mg/dl.</li>
+                                                <li>糖尿病:≧126 mg/dl.</li>
+                                            </ul>
+                                        </dl>
+                                        <dl>
+                                            <dt>飯後血糖</dt>
+                                            <ul>
+                                                <li><b>正常飯後2小時血糖值:<140 mg/dl.</b></li>
+                                                <li>糖尿病前期:140~199 mg/dl.</li>
+                                                <li>糖尿病:≧200 mg/dl.</li>
+                                            </ul>
+                                        </dl>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <font color = red style="font-size: 15px;"><b>　＊紅字代表不在正常範圍值，要多加注意！</b></font><br>
+                        </div>
+                        <div class="div_table">
+                            <div class="CSSTableGenerator scrollit"><br>
+                                <div id="show_dailyrecord_data"></div>
+                            </div>            
+                        </div>
+                        <div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="myTable-popup-popup"><div class="ui-table-columntoggle-popup ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" id="myTable-popup"><fieldset class="ui-controlgroup ui-controlgroup-vertical ui-corner-all"><div class="ui-controlgroup-controls "><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-first-child ui-checkbox-off">CustomerID</label><input type="checkbox" checked="" data-cacheval="true"></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-on">ContactName</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-on">Address</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-on">City</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-checkbox-off">PostalCode</label><input type="checkbox" checked=""></div><div class="ui-checkbox"><label class="ui-btn ui-corner-all ui-btn-null ui-btn-icon-left ui-last-child ui-checkbox-off">Country</label><input type="checkbox" checked=""></div></div></fieldset></div></div>
+                        <br>
+                    </div>	
+                </div>
+
+
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a rel="external"  href="health_people.html" class="ui-btn-active ui-state-persist"><img class="icon_img" src="icon/people.png"><br>健康紀錄</a></li>
+                        <li><a rel="external" href="health_needle.html"><img class="icon_img" src="icon/needle.png"><br>疫苗紀錄</a></li>
+                        <li><a rel="external"  href="health_medicine.html"><img class="icon_img" src="icon/medicine.png"><br>藥品紀錄</a></li>
+                    </ul>
+                </nav>
+                <!--<div class="div_icon" onclick="window.location='health_people.php'"><img src="icon/people.png"></div>
+                <div class="div_icon" onclick="window.location='health_needle.html'"><img src="icon/needle.png"></div>
+                <div class="div_icon" onclick="window.location='health_medicine.html'"><img src="icon/medicine.png"></div>
+                <div class="div_icon" onclick="window.location='health_diet.html'"><img src="icon/diet.png"></div>-->
+            </footer>
+        </div>
+    </body>
 
 </html>
